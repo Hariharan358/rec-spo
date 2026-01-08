@@ -18,10 +18,10 @@ export const ContactSection = () => {
           {/* Contact Info */}
           <div className="space-y-6">
             <h3 className="font-display text-2xl text-foreground tracking-wider">
-              VISIT US AT THE SPORTS COMPLEX
+              VISIT US AT REC SPORTS COMPLEX
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              Our sports complex is open to all students and faculty members. Come visit us during office hours or reach out through any of the channels below.
+              Our sports complex at Rajalakshmi Engineering College is open to all students and faculty members. Come visit us during office hours or reach out through any of the channels below.
             </p>
 
             <div className="space-y-4">
@@ -32,9 +32,9 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-semibold text-foreground">Address</h4>
                   <p className="text-sm text-muted-foreground">
-                    Sports Complex, University Campus<br />
-                    Main Road, City - 123456<br />
-                    State, India
+                    REC Sports Complex, Rajalakshmi Engineering College<br />
+                    Thandalam, Chennai - 602105<br />
+                    Tamil Nadu, India
                   </p>
                 </div>
               </div>
@@ -59,8 +59,8 @@ export const ContactSection = () => {
                 <div>
                   <h4 className="font-semibold text-foreground">Email</h4>
                   <p className="text-sm text-muted-foreground">
-                    sports@university.edu<br />
-                    titans.club@university.edu
+                    sports@rajalakshmi.edu.in<br />
+                    rec.sports@rajalakshmi.edu.in
                   </p>
                 </div>
               </div>

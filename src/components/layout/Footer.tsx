@@ -1,4 +1,5 @@
 import { Trophy, Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import recLogo from "/rec_logo.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,19 +10,21 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-                <Trophy className="w-7 h-7 text-secondary-foreground" />
-              </div>
-              <div>
-                <span className="font-display text-2xl tracking-wider">TITANS</span>
-                <span className="block text-xs text-primary-foreground/70 -mt-1">
-                  Sports Club
-                </span>
-              </div>
+            <div className="flex items-center gap-3">
+              <img 
+                src={recLogo} 
+                alt="Rajalakshmi Engineering College" 
+                className="h-16 w-auto logo-glow"
+              />
+            </div>
+            <div className="ml-2">
+              <span className="font-display text-xl tracking-wider text-primary-foreground">SPORTS CLUB</span>
+              <span className="block text-sm text-primary-foreground/70 -mt-1">
+                Excellence in Athletics
+              </span>
             </div>
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              Empowering students through sports, building champions in life and on the field since 1985.
+              Empowering students through sports, building champions in life and on the field at Rajalakshmi Engineering College.
             </p>
             <div className="flex gap-3">
               {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
@@ -95,7 +98,7 @@ export const Footer = () => {
         <div className="border-t border-primary-foreground/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-primary-foreground/50">
-              © {currentYear} Titans Sports Club. All rights reserved.
+              © {currentYear} REC Sports Club - Rajalakshmi Engineering College. All rights reserved.
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-sm text-primary-foreground/50 hover:text-primary-foreground">

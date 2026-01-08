@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { Menu, X, Trophy } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
+import recLogo from "/rec_logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -24,9 +26,15 @@ export const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20 }}
+        className={`dynamic-island transition-all duration-500 ease-in-out ${isMenuOpen ? "dynamic-island-menu-open h-auto" : "dynamic-island-expanded"
+          }`}
+      >
+        <div className="flex items-center justify-between h-full px-6 py-2">
           {/* Logo */}
           <a
             href="#home"
@@ -34,23 +42,28 @@ export const Header = () => {
               e.preventDefault();
               scrollToSection("#home");
             }}
-            className="flex items-center gap-2 text-primary-foreground"
+            className="flex items-center gap-3 text-primary-foreground group shrink-0"
           >
-            <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-              <Trophy className="w-6 h-6 text-secondary-foreground" />
+            <div className="relative">
+              <img
+                src={recLogo}
+                alt="Logo"
+                className="h-10 w-auto rec-logo group-hover:scale-110 transition-transform duration-300"
+              />
             </div>
-            <div className="hidden sm:block">
-              <span className="font-display text-xl tracking-wider">
-                TITANS
+            <motion.div
+              initial={{ opacity: 0, width: 0 }}
+              animate={{ opacity: 1, width: "auto" }}
+              className="hidden sm:block overflow-hidden whitespace-nowrap"
+            >
+              <span className="font-display text-lg tracking-wider gradient-text">
+                
               </span>
-              <span className="block text-xs text-primary-foreground/70 -mt-1">
-                Sports Club
-              </span>
-            </div>
+            </motion.div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -59,61 +72,65 @@ export const Header = () => {
                   e.preventDefault();
                   scrollToSection(link.href);
                 }}
-                className="nav-link text-primary-foreground/80 hover:text-primary-foreground text-sm font-medium"
+                className="nav-link text-white/90 hover:text-white text-sm font-medium px-3 py-1.5 rounded-full transition-all duration-300"
               >
                 {link.name}
               </a>
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-4">
-            <Button
-              variant="athletic"
-              onClick={() => scrollToSection("#register")}
+          {/* Actions */}
+          <div className="flex items-center gap-3">
+            
+
+            {/* Mobile Menu Toggle */}
+            <button
+              className={`lg:hidden text-white p-2 rounded-full hover:bg-white/20 transition-all duration-300 ${isMenuOpen ? "bg-white/20 rotate-180" : ""
+                }`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
-              Join Club
-            </Button>
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-primary-foreground p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="lg:hidden bg-primary border-t border-primary-foreground/10">
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
-                className="text-primary-foreground/80 hover:text-primary-foreground py-2 text-sm font-medium"
-              >
-                {link.name}
-              </a>
-            ))}
-            <Button
-              variant="athletic"
-              className="mt-4 w-full"
-              onClick={() => scrollToSection("#register")}
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden bg-primary/20 backdrop-blur-xl border-t border-white/10"
             >
-              Join Club
-            </Button>
-          </nav>
-        </div>
-      )}
-    </header>
+              <nav className="flex flex-col p-4 gap-2">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToSection(link.href);
+                    }}
+                    className="text-white/90 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-center"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+                <Button
+                  variant="athletic"
+                  className="w-full mt-2 btn-athletic"
+                  onClick={() => scrollToSection("#register")}
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Join Club
+                </Button>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </div>
   );
 };

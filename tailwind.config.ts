@@ -65,11 +65,11 @@ export default {
           DEFAULT: "hsl(var(--navy))",
           light: "hsl(var(--navy-light))",
         },
-        orange: {
+        violet: {
           DEFAULT: "hsl(var(--orange))",
           dark: "hsl(var(--orange-dark))",
         },
-        gold: "hsl(var(--gold))",
+        lavender: "hsl(var(--gold))",
         success: "hsl(var(--success))",
       },
       borderRadius: {
@@ -102,15 +102,15 @@ export default {
         "bounce-subtle": "bounce-subtle 2s ease-in-out infinite",
       },
       backgroundImage: {
-        'hero-pattern': 'linear-gradient(135deg, hsl(213 56% 20%) 0%, hsl(213 45% 30%) 50%, hsl(32 95% 55%) 100%)',
-        'card-gradient': 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%)',
-        'accent-gradient': 'linear-gradient(135deg, hsl(32 95% 55%) 0%, hsl(45 93% 47%) 100%)',
+        'hero-pattern': 'linear-gradient(135deg, hsl(270 50% 40%) 0%, hsl(270 40% 50%) 50%, hsl(270 70% 60%) 100%)',
+        'card-gradient': 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(270 10% 98%) 100%)',
+        'accent-gradient': 'linear-gradient(135deg, hsl(270 70% 60%) 0%, hsl(270 80% 70%) 100%)',
       },
       boxShadow: {
-        'glow': '0 0 30px hsl(32 95% 55% / 0.3)',
-        'glow-lg': '0 0 50px hsl(32 95% 55% / 0.4)',
-        'card': '0 4px 6px -1px hsl(213 56% 20% / 0.1), 0 2px 4px -2px hsl(213 56% 20% / 0.1)',
-        'card-hover': '0 20px 25px -5px hsl(213 56% 20% / 0.15), 0 8px 10px -6px hsl(213 56% 20% / 0.1)',
+        'glow': '0 0 30px hsl(270 70% 60% / 0.3)',
+        'glow-lg': '0 0 50px hsl(270 70% 60% / 0.4)',
+        'card': '0 4px 6px -1px hsl(270 50% 40% / 0.1), 0 2px 4px -2px hsl(270 50% 40% / 0.1)',
+        'card-hover': '0 20px 25px -5px hsl(270 50% 40% / 0.15), 0 8px 10px -6px hsl(270 50% 40% / 0.1)',
       },
     },
   },

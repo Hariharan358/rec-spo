@@ -10,7 +10,7 @@ export const AboutSection = () => {
             Est. 1985
           </span>
           <h2 className="section-heading text-foreground">
-            ABOUT <span className="text-gradient">TITANS</span>
+            ABOUT <span className="text-gradient">REC SPORTS</span>
           </h2>
         </div>
 
@@ -22,7 +22,7 @@ export const AboutSection = () => {
               BUILDING CHAMPIONS SINCE 1985
             </h3>
             <p className="text-muted-foreground leading-relaxed">
-              The Titans Sports Club was established with a vision to create a platform where students could excel in sports while pursuing their academic goals. Over the decades, we have grown into one of the most prestigious college sports clubs in the region.
+              The REC Sports Club at Rajalakshmi Engineering College was established with a vision to create a platform where students could excel in sports while pursuing their academic goals. Over the decades, we have grown into one of the most prestigious college sports clubs in the region.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Our state-of-the-art facilities, experienced coaches, and dedicated training programs have produced numerous national and state-level athletes. We believe that sports build character, discipline, and leadership qualities that extend far beyond the playing field.
