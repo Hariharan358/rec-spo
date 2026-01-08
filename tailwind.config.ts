@@ -13,6 +13,10 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Bebas Neue', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -57,6 +61,16 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        navy: {
+          DEFAULT: "hsl(var(--navy))",
+          light: "hsl(var(--navy-light))",
+        },
+        orange: {
+          DEFAULT: "hsl(var(--orange))",
+          dark: "hsl(var(--orange-dark))",
+        },
+        gold: "hsl(var(--gold))",
+        success: "hsl(var(--success))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,25 +79,38 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "bounce-subtle": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-5px)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.5s ease-out",
+        "bounce-subtle": "bounce-subtle 2s ease-in-out infinite",
+      },
+      backgroundImage: {
+        'hero-pattern': 'linear-gradient(135deg, hsl(213 56% 20%) 0%, hsl(213 45% 30%) 50%, hsl(32 95% 55%) 100%)',
+        'card-gradient': 'linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 20% 98%) 100%)',
+        'accent-gradient': 'linear-gradient(135deg, hsl(32 95% 55%) 0%, hsl(45 93% 47%) 100%)',
+      },
+      boxShadow: {
+        'glow': '0 0 30px hsl(32 95% 55% / 0.3)',
+        'glow-lg': '0 0 50px hsl(32 95% 55% / 0.4)',
+        'card': '0 4px 6px -1px hsl(213 56% 20% / 0.1), 0 2px 4px -2px hsl(213 56% 20% / 0.1)',
+        'card-hover': '0 20px 25px -5px hsl(213 56% 20% / 0.15), 0 8px 10px -6px hsl(213 56% 20% / 0.1)',
       },
     },
   },
