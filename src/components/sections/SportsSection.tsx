@@ -1,81 +1,9 @@
 import { Clock, MapPin, User, Star, Trophy, Zap } from "lucide-react";
-import cricketImg from "@/assets/sports/cricket.jpg";
-import footballImg from "@/assets/sports/football.jpg";
-import basketballImg from "@/assets/sports/basketball.jpg";
-import badmintonImg from "@/assets/sports/badminton.jpg";
-import volleyballImg from "@/assets/sports/volleyball.jpg";
-import tabletennisImg from "@/assets/sports/tabletennis.jpg";
-
-const sports = [
-  {
-    name: "Cricket",
-    image: cricketImg,
-    schedule: "Mon, Wed, Fri - 4:00 PM",
-    venue: "Main Cricket Ground",
-    captain: "Rahul Verma",
-    coach: "Mr. Suresh Raina",
-    rating: 4.9,
-    members: 45,
-    featured: true,
-  },
-  {
-    name: "Football",
-    image: footballImg,
-    schedule: "Tue, Thu, Sat - 5:00 PM",
-    venue: "Football Stadium",
-    captain: "Arjun Menon",
-    coach: "Mr. Bhaichung Bhutia",
-    rating: 4.8,
-    members: 38,
-    featured: false,
-  },
-  {
-    name: "Basketball",
-    image: basketballImg,
-    schedule: "Mon, Wed, Fri - 6:00 PM",
-    venue: "Indoor Sports Complex",
-    captain: "Sneha Reddy",
-    coach: "Mr. Satnam Singh",
-    rating: 4.7,
-    members: 32,
-    featured: true,
-  },
-  {
-    name: "Badminton",
-    image: badmintonImg,
-    schedule: "Tue, Thu - 4:30 PM",
-    venue: "Badminton Hall",
-    captain: "Aditya Kumar",
-    coach: "Ms. P.V. Sindhu",
-    rating: 4.9,
-    members: 28,
-    featured: false,
-  },
-  {
-    name: "Volleyball",
-    image: volleyballImg,
-    schedule: "Mon, Wed, Sat - 5:30 PM",
-    venue: "Volleyball Court",
-    captain: "Deepika Nair",
-    coach: "Mr. Jimmy George",
-    rating: 4.6,
-    members: 35,
-    featured: false,
-  },
-  {
-    name: "Table Tennis",
-    image: tabletennisImg,
-    schedule: "Daily - 3:00 PM",
-    venue: "TT Room, Sports Block",
-    captain: "Karan Malhotra",
-    coach: "Ms. Manika Batra",
-    rating: 4.8,
-    members: 42,
-    featured: true,
-  },
-];
+import { useData } from "@/context/DataContext";
 
 export const SportsSection = () => {
+  const { sports } = useData();
+
   return (
     <section id="sports" className="py-20 md:py-28 bg-muted relative overflow-hidden">
       {/* Background Elements */}
@@ -105,7 +33,7 @@ export const SportsSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {sports.map((sport, index) => (
             <div
-              key={sport.name}
+              key={sport.id}
               className={`group relative ${sport.featured ? 'card-premium' : 'card-sports'} overflow-hidden hover-lift card-3d stagger-animation`}
               style={{ '--delay': `${0.6 + index * 0.1}s` } as React.CSSProperties}
             >
@@ -125,7 +53,7 @@ export const SportsSection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/20 to-transparent" />
-                
+
                 {/* Sport Name Overlay */}
                 <div className="absolute bottom-4 left-4 right-4">
                   <h3 className="font-display text-3xl text-primary-foreground tracking-wider mb-2 group-hover:animate-text-glow">
@@ -162,7 +90,7 @@ export const SportsSection = () => {
                       <p className="text-sm text-muted-foreground">{sport.schedule}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3 group/item hover:bg-muted/50 p-2 rounded-lg transition-colors">
                     <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5 group-hover/item:animate-bounce" />
                     <div>
@@ -170,7 +98,7 @@ export const SportsSection = () => {
                       <p className="text-sm text-muted-foreground">{sport.venue}</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-3 group/item hover:bg-muted/50 p-2 rounded-lg transition-colors">
                     <User className="w-5 h-5 text-secondary shrink-0 mt-0.5 group-hover/item:animate-pulse" />
                     <div>

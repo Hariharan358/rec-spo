@@ -46,7 +46,7 @@ export const HeroSection = () => {
             <span className="text-sm text-primary-foreground font-semibold tracking-wide">
               REC SPORTS CLUB
             </span>
-            
+
           </div>
 
           {/* Main Headline */}
@@ -63,7 +63,7 @@ export const HeroSection = () => {
           {/* Enhanced Subtitle */}
           <div className="relative max-w-3xl mx-auto mb-10 stagger-animation" style={{ '--delay': '0.4s' } as React.CSSProperties}>
             <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed">
-              Join the <span className="gradient-text font-semibold">REC Sports Club</span> at Rajalakshmi Engineering College and be part of a legacy of champions. 
+              Join the <span className="gradient-text font-semibold">REC Sports Club</span> at Rajalakshmi Engineering College and be part of a legacy of champions.
               Train with the best, compete at the highest level, and forge friendships that last a lifetime.
             </p>
             <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-secondary to-violet-dark rounded-full animate-shimmer"></div>
@@ -128,7 +128,7 @@ export const HeroSection = () => {
           <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
             <div className="w-1 h-3 bg-current rounded-full mt-2 animate-bounce"></div>
           </div>
-         
+
         </button>
       </div>
 
@@ -149,7 +149,7 @@ export const HeroSection = () => {
       </div>
 
       {/* ScrollVelocity Effect */}
-      
+
     </section>
   );
 };

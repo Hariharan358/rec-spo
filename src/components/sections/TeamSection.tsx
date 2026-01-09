@@ -1,57 +1,65 @@
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { useData } from "@/context/DataContext";
+import ChromaGrid, { ChromaItem } from "@/component/ChromaGrid";
 
-const teamMembers = [
+// Pre-defined styles to cycle through for visual variety
+const styleVariants = [
   {
-    name: "Dr. Rajesh Kumar",
-    role: "Faculty Coordinator",
-    description: "20+ years in sports administration",
-    image: "RK",
+    borderColor: "#3B82F6",
+    gradient: "linear-gradient(145deg, #3B82F6, #000)"
   },
   {
-    name: "Prof. Anita Sharma",
-    role: "Sports Director",
-    description: "Former national athlete",
-    image: "AS",
+    borderColor: "#10B981",
+    gradient: "linear-gradient(180deg, #10B981, #000)"
   },
   {
-    name: "Vikram Singh",
-    role: "Club President",
-    description: "4th Year, Computer Science",
-    image: "VS",
+    borderColor: "#F59E0B",
+    gradient: "linear-gradient(165deg, #F59E0B, #000)"
   },
   {
-    name: "Priya Patel",
-    role: "Sports Secretary",
-    description: "3rd Year, Commerce",
-    image: "PP",
+    borderColor: "#EF4444",
+    gradient: "linear-gradient(195deg, #EF4444, #000)"
   },
   {
-    name: "Rahul Verma",
-    role: "Cricket Captain",
-    description: "State level player",
-    image: "RV",
+    borderColor: "#8B5CF6",
+    gradient: "linear-gradient(225deg, #8B5CF6, #000)"
   },
   {
-    name: "Sneha Reddy",
-    role: "Basketball Captain",
-    description: "University topper",
-    image: "SR",
+    borderColor: "#06B6D4",
+    gradient: "linear-gradient(135deg, #06B6D4, #000)"
   },
   {
-    name: "Arjun Menon",
-    role: "Football Captain",
-    description: "All-rounder athlete",
-    image: "AM",
+    borderColor: "#EC4899",
+    gradient: "linear-gradient(150deg, #EC4899, #000)"
   },
   {
-    name: "Deepika Nair",
-    role: "Volleyball Captain",
-    description: "National camp trainee",
-    image: "DN",
-  },
+    borderColor: "#6366F1",
+    gradient: "linear-gradient(160deg, #6366F1, #000)"
+  }
 ];
 
 export const TeamSection = () => {
+  const { teamMembers } = useData();
+
+  const formattedItems: ChromaItem[] = teamMembers.map((member, index) => {
+    const style = styleVariants[index % styleVariants.length];
+
+    // Determine image source: if it looks like a URL, use it; otherwise use ui-avatars
+    const imageSrc = member.image.startsWith('http') || member.image.startsWith('/')
+      ? member.image
+      : `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name)}&background=random&size=300`;
+
+    return {
+      image: imageSrc,
+      title: member.name,
+      subtitle: member.role,
+      location: member.description, // Using description as location since it fits the layout well
+      borderColor: style.borderColor,
+      gradient: style.gradient,
+      handle: "", // Optional, leaving blank or could be a short handle if we had one
+      url: "#"
+    };
+  });
+
   return (
     <section id="team" className="py-20 md:py-28 bg-muted">
       <div className="container mx-auto px-4">
@@ -68,36 +76,15 @@ export const TeamSection = () => {
           </p>
         </div>
 
-        {/* Team Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {teamMembers.map((member) => (
-            <div key={member.name} className="card-sports p-6 text-center group">
-              {/* Avatar */}
-              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary mx-auto mb-4 flex items-center justify-center group-hover:shadow-glow transition-shadow">
-                <span className="font-display text-2xl text-primary-foreground">
-                  {member.image}
-                </span>
-              </div>
-
-              {/* Info */}
-              <h3 className="font-semibold text-foreground text-lg">{member.name}</h3>
-              <p className="text-secondary font-medium text-sm">{member.role}</p>
-              <p className="text-muted-foreground text-sm mt-1">{member.description}</p>
-
-              {/* Social Links */}
-              <div className="flex items-center justify-center gap-2 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                {[Linkedin, Twitter, Mail].map((Icon, i) => (
-                  <a
-                    key={i}
-                    href="#"
-                    className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-secondary transition-colors"
-                  >
-                    <Icon className="w-4 h-4 text-foreground" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
+        {/* ChromaGrid Team Display */}
+        <div style={{ minHeight: '800px', position: 'relative' }}>
+          <ChromaGrid
+            items={formattedItems}
+            radius={300}
+            damping={0.45}
+            fadeOut={0.6}
+            ease="power3.out"
+          />
         </div>
       </div>
     </section>

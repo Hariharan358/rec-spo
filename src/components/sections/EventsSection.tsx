@@ -1,53 +1,18 @@
 import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-
-const upcomingEvents = [
-  {
-    id: 1,
-    title: "Inter-College Cricket Championship",
-    date: "Jan 25-28, 2026",
-    time: "9:00 AM onwards",
-    venue: "University Cricket Stadium",
-    type: "Tournament",
-    status: "Registration Open",
-  },
-  {
-    id: 2,
-    title: "Annual Sports Day",
-    date: "Feb 15, 2026",
-    time: "8:00 AM - 6:00 PM",
-    venue: "Main Sports Complex",
-    type: "Event",
-    status: "Coming Soon",
-  },
-  {
-    id: 3,
-    title: "Basketball League Finals",
-    date: "Feb 22, 2026",
-    time: "4:00 PM",
-    venue: "Indoor Stadium",
-    type: "Match",
-    status: "Registration Open",
-  },
-  {
-    id: 4,
-    title: "Badminton Open Tournament",
-    date: "Mar 5-7, 2026",
-    time: "10:00 AM onwards",
-    venue: "Badminton Arena",
-    type: "Tournament",
-    status: "Registration Open",
-  },
-];
+import { useData } from "@/context/DataContext";
 
 const pastEvents = [
   { title: "State Football Championship", result: "Winners 🏆" },
   { title: "National Volleyball Meet", result: "Runners-up 🥈" },
   { title: "Inter-University Cricket", result: "Semi-finalists" },
+  { title: "Inter-University Football", result: "Semi-finalists" },
 ];
 
 export const EventsSection = () => {
+  const { events } = useData();
+
   const scrollToRegister = () => {
     const element = document.querySelector("#register");
     if (element) {
@@ -74,9 +39,9 @@ export const EventsSection = () => {
             <h3 className="font-display text-2xl text-foreground tracking-wider">
               UPCOMING EVENTS
             </h3>
-            
+
             <div className="space-y-4">
-              {upcomingEvents.map((event) => (
+              {events.map((event) => (
                 <div
                   key={event.id}
                   className="card-sports p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4"
