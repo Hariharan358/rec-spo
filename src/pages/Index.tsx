@@ -1,4 +1,5 @@
 import { Header } from "@/components/layout/Header";
+import { GridBackground } from "@/components/ui/GridBackground";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
@@ -16,33 +17,35 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <AboutSection />
-        
-        {/* ScrollVelocity Effect between sections */}
-        <div className="bg-primary py-2">
-          <ScrollVelocity
-            texts={['REC SPORTS CLUB', 'RAJALAKSHMI ENGINEERING COLLEGE']} 
-            velocity={75} 
-            className="custom-scroll-text"
-          />
-        </div>
-        
-        <SportsSection />
-        <EventsSection />
-        
-        {/* Another ScrollVelocity Effect */}
-        <div className="bg-muted py-4">
-          <ScrollVelocity
-            texts={['CHAMPIONS LEAGUE', 'REC SPORTS', 'EXCELLENCE']} 
-            velocity={-60} 
-            className="custom-scroll-text"
-          />
-        </div>
+        <GridBackground>
+          <AboutSection />
 
-        <RegistrationSection />
-        <TeamSection />
-        <GallerySection />
-        <ContactSection />
+          {/* ScrollVelocity Effect between sections */}
+          <div className="bg-primary py-2">
+            <ScrollVelocity
+              texts={['REC SPORTS CLUB', 'RAJALAKSHMI ENGINEERING COLLEGE']}
+              velocity={75}
+              className="custom-scroll-text"
+            />
+          </div>
+
+          <SportsSection />
+          <EventsSection />
+
+          {/* Another ScrollVelocity Effect */}
+          <div className="bg-muted py-4">
+            <ScrollVelocity
+              texts={['CHAMPIONS LEAGUE', 'REC SPORTS', 'EXCELLENCE']}
+              velocity={-60}
+              className="custom-scroll-text"
+            />
+          </div>
+
+          <RegistrationSection />
+          <TeamSection />
+          <GallerySection />
+          <ContactSection />
+        </GridBackground>
       </main>
       <Footer />
     </div>

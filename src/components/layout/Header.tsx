@@ -31,10 +31,10 @@ export const Header = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        className={`dynamic-island transition-all duration-500 ease-in-out ${isMenuOpen ? "dynamic-island-menu-open h-auto" : "dynamic-island-expanded"
+        className={`dynamic-island transition-all duration-500 ease-in-out ${isMenuOpen ? "flex flex-col w-[90vw] max-w-md h-auto rounded-[2rem]" : "dynamic-island-expanded"
           }`}
       >
-        <div className="flex items-center justify-between h-full px-6 py-2">
+        <div className="flex items-center justify-between px-6 py-2 min-h-[64px]">
           {/* Logo */}
           <a
             href="#home"
@@ -57,7 +57,7 @@ export const Header = () => {
               className="hidden sm:block overflow-hidden whitespace-nowrap"
             >
               <span className="font-display text-lg tracking-wider gradient-text">
-                
+
               </span>
             </motion.div>
           </a>
@@ -81,7 +81,7 @@ export const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            
+
 
             {/* Mobile Menu Toggle */}
             <button
@@ -102,7 +102,7 @@ export const Header = () => {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden bg-primary/20 backdrop-blur-xl border-t border-white/10"
+              className="overflow-hidden bg-black/20 backdrop-blur-xl border-t border-white/10"
             >
               <nav className="flex flex-col p-4 gap-2">
                 {navLinks.map((link) => (
@@ -113,7 +113,7 @@ export const Header = () => {
                       e.preventDefault();
                       scrollToSection(link.href);
                     }}
-                    className="text-white/90 hover:text-white hover:bg-white/10 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors text-center"
+                    className="block w-full text-white text-lg font-medium py-3 px-4 rounded-xl hover:bg-white/10 transition-colors text-center"
                   >
                     {link.name}
                   </a>

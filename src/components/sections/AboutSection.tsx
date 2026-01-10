@@ -79,10 +79,9 @@ export const AboutSection = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "Dr. Rajesh Kumar", role: "Faculty Coordinator", icon: Users },
-              { name: "Prof. Anita Sharma", role: "Sports Director", icon: Award },
-              { name: "Vikram Singh", role: "Student Coordinator", icon: Users },
-              { name: "Priya Patel", role: "Student Coordinator", icon: Users },
+              { name: "Dr.M.Vijayaragavan", role: "Director Of Physical Education", icon: Users },
+              { name: "Ms.Renuga", role: "Sports Director", icon: Award },
+              
             ].map((person) => (
               <div key={person.name} className="text-center">
                 <div className="w-20 h-20 rounded-full bg-primary mx-auto mb-4 flex items-center justify-center">

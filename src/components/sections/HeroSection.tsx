@@ -26,11 +26,15 @@ export const HeroSection = () => {
 
       {/* Background Image */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage}
-          alt="Athletes celebrating victory"
-          className="w-full h-full object-cover animate-scale-in"
-        />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-overlay animate-gradient-shift" />
       </div>
 
@@ -50,7 +54,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-primary-foreground tracking-wider mb-8 stagger-animation" style={{ '--delay': '0.2s' } as React.CSSProperties}>
+          <h1 className="font-display font-black uppercase text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground tracking-wider mb-8 stagger-animation" style={{ '--delay': '0.2s' } as React.CSSProperties}>
             UNLEASH YOUR
             <span className="block gradient-text animate-text-glow relative">
               POTENTIAL
@@ -62,7 +66,7 @@ export const HeroSection = () => {
 
           {/* Enhanced Subtitle */}
           <div className="relative max-w-3xl mx-auto mb-10 stagger-animation" style={{ '--delay': '0.4s' } as React.CSSProperties}>
-            <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed">
+            <p className="font-display tracking-wide text-lg md:text-xl text-primary-foreground/90 leading-relaxed">
               Join the <span className="gradient-text font-semibold">REC Sports Club</span> at Rajalakshmi Engineering College and be part of a legacy of champions.
               Train with the best, compete at the highest level, and forge friendships that last a lifetime.
             </p>
@@ -77,7 +81,7 @@ export const HeroSection = () => {
               className="btn-athletic group relative overflow-hidden"
               onClick={() => scrollToSection("#register")}
             >
-              <Zap className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+             
               Join the Club
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
             </Button>
@@ -107,7 +111,7 @@ export const HeroSection = () => {
                 <div className={`w-12 h-12 rounded-2xl bg-gradient-to-r ${stat.color} flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300 animate-morph`}>
                   <stat.icon className="w-6 h-6 text-white" />
                 </div>
-                <div className="font-display text-3xl md:text-4xl text-primary-foreground gradient-text">
+                <div className="font-display font-bold text-3xl md:text-4xl text-primary-foreground gradient-text">
                   {stat.value}
                 </div>
                 <div className="text-sm text-primary-foreground/70 font-medium">{stat.label}</div>
@@ -124,7 +128,7 @@ export const HeroSection = () => {
           className="group flex flex-col items-center gap-2 text-primary-foreground/60 hover:text-primary-foreground transition-all duration-300"
           aria-label="Scroll down"
         >
-          <span className="text-xs font-medium tracking-wider">SCROLL</span>
+          <span className="text-xs font-medium tracking-wider"></span>
           <div className="w-6 h-10 border-2 border-current rounded-full flex justify-center">
             <div className="w-1 h-3 bg-current rounded-full mt-2 animate-bounce"></div>
           </div>

@@ -1,4 +1,4 @@
-import { Clock, MapPin, User, Star, Trophy, Zap } from "lucide-react";
+import { Clock, MapPin, User, Star, Zap } from "lucide-react";
 import { useData } from "@/context/DataContext";
 
 export const SportsSection = () => {
@@ -22,7 +22,7 @@ export const SportsSection = () => {
             </span>
           </div>
           <h2 className="section-heading text-foreground stagger-animation" style={{ '--delay': '0.2s' } as React.CSSProperties}>
-            OUR <span className="gradient-text animate-text-glow">SPORTS</span>
+            OUR <span className="text-purple-500 ">SPORTS</span>
           </h2>
           <p className="text-muted-foreground mt-6 max-w-3xl mx-auto text-lg leading-relaxed stagger-animation" style={{ '--delay': '0.4s' } as React.CSSProperties}>
             Choose from our diverse range of sports and find your passion. Each program offers professional coaching and competitive opportunities.
@@ -34,94 +34,87 @@ export const SportsSection = () => {
           {sports.map((sport, index) => (
             <div
               key={sport.id}
-              className={`group relative ${sport.featured ? 'card-premium' : 'card-sports'} overflow-hidden hover-lift card-3d stagger-animation`}
+              className="group relative rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:border-purple-500/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] stagger-animation"
               style={{ '--delay': `${0.6 + index * 0.1}s` } as React.CSSProperties}
             >
-              {/* Featured Badge */}
-              {sport.featured && (
-                <div className="absolute top-4 right-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full animate-pulse-glow">
-                  <Star className="w-3 h-3 inline mr-1" />
-                  FEATURED
-                </div>
-              )}
-
-              {/* Image Container */}
-              <div className="relative h-56 overflow-hidden">
+              {/* Image Section */}
+              <div className="relative h-64 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
                 <img
                   src={sport.image}
                   alt={sport.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/20 to-transparent" />
 
-                {/* Sport Name Overlay */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-display text-3xl text-primary-foreground tracking-wider mb-2 group-hover:animate-text-glow">
-                    {sport.name.toUpperCase()}
+                {/* Floating Badge */}
+                {sport.featured && (
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-yellow-400/90 backdrop-blur-sm text-black text-xs font-bold tracking-wide shadow-lg">
+                      <Star className="w-3.5 h-3.5 fill-current" />
+                      FEATURED
+                    </span>
+                  </div>
+                )}
+
+                {/* Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="font-display font-black text-4xl text-white tracking-wide uppercase mb-2 drop-shadow-lg">
+                    {sport.name}
                   </h3>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      <span className="text-primary-foreground/90 text-sm font-medium">{sport.rating}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <User className="w-4 h-4 text-secondary" />
-                      <span className="text-primary-foreground/90 text-sm">{sport.members} members</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-violet/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-                  <div className="text-center">
-                    <Trophy className="w-12 h-12 text-white mx-auto mb-2 animate-bounce-in" />
-                    <p className="text-white font-semibold">Join Now</p>
+                  <div className="flex items-center gap-4 text-white/90 text-sm font-medium">
+                    <span className="flex items-center gap-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                      <User className="w-4 h-4 text-purple-400" />
+                      {sport.members} Members
+                    </span>
+                    <span className="flex items-center gap-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                      <Star className="w-4 h-4 text-yellow-400" />
+                      {sport.rating}/5.0
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Enhanced Details */}
-              <div className="p-6 space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3 group/item hover:bg-muted/50 p-2 rounded-lg transition-colors">
-                    <Clock className="w-5 h-5 text-secondary shrink-0 mt-0.5 group-hover/item:animate-spin" />
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Schedule</p>
-                      <p className="text-sm text-muted-foreground">{sport.schedule}</p>
+              {/* Content Section */}
+              <div className="p-6 space-y-6 bg-gradient-to-b from-white/5 to-transparent backdrop-blur-sm">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
+                      <Clock className="w-3.5 h-3.5" />
+                      Schedule
                     </div>
+                    <p className="text-sm text-white/80 font-medium leading-tight">
+                      {sport.schedule}
+                    </p>
                   </div>
-
-                  <div className="flex items-start gap-3 group/item hover:bg-muted/50 p-2 rounded-lg transition-colors">
-                    <MapPin className="w-5 h-5 text-secondary shrink-0 mt-0.5 group-hover/item:animate-bounce" />
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Venue</p>
-                      <p className="text-sm text-muted-foreground">{sport.venue}</p>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-wider">
+                      <MapPin className="w-3.5 h-3.5" />
+                      Venue
                     </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 group/item hover:bg-muted/50 p-2 rounded-lg transition-colors">
-                    <User className="w-5 h-5 text-secondary shrink-0 mt-0.5 group-hover/item:animate-pulse" />
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Leadership</p>
-                      <p className="text-xs text-muted-foreground">
-                        Coach: <span className="font-medium">{sport.coach}</span>
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Captain: <span className="font-medium">{sport.captain}</span>
-                      </p>
-                    </div>
+                    <p className="text-sm text-white/80 font-medium leading-tight">
+                      {sport.venue}
+                    </p>
                   </div>
                 </div>
 
-                {/* Action Button */}
-                <button className="w-full btn-athletic py-3 text-sm font-semibold group/btn">
-                  <Zap className="w-4 h-4 mr-2 group-hover/btn:animate-bounce" />
-                  Join {sport.name}
-                </button>
-              </div>
+                <div className="pt-4 border-t border-white/10">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white ring-2 ring-white/10">
+                        <span className="font-display font-bold text-lg">{sport.coach.charAt(0)}</span>
+                      </div>
+                      <div>
+                        <p className="text-xs text-white/50 uppercase tracking-wider font-semibold">Head Coach</p>
+                        <p className="text-sm text-white font-medium">{sport.coach}</p>
+                      </div>
+                    </div>
 
-              {/* Decorative Elements */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-violet to-secondary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                    <button className="group/btn relative w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white hover:border-white transition-all duration-300">
+                      <Zap className="w-5 h-5 text-white group-hover/btn:text-purple-600 transition-colors duration-300" />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           ))}
         </div>
