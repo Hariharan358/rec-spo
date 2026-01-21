@@ -253,12 +253,50 @@ function GalleryManager({
 }) {
     const [isAdding, setIsAdding] = useState(false);
     const [formData, setFormData] = useState({ src: '', alt: '' });
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isUploading, setIsUploading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        onAdd(formData);
-        setFormData({ src: '', alt: '' });
-        setIsAdding(false);
+
+        let imageUrl = formData.src;
+
+        if (selectedFile) {
+            setIsUploading(true);
+            try {
+                const uploadData = new FormData();
+                uploadData.append('image', selectedFile);
+                uploadData.append('description', formData.alt);
+                uploadData.append('category', 'gallery');
+
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                const response = await fetch(`${apiUrl}/images`, {
+                    method: 'POST',
+                    body: uploadData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+
+                const data = await response.json();
+                imageUrl = data.secureUrl || data.url;
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Failed to upload image. Please try again.');
+                setIsUploading(false);
+                return;
+            } finally {
+                setIsUploading(false);
+            }
+        }
+
+        if (imageUrl) {
+            onAdd({ src: imageUrl, alt: formData.alt });
+            setFormData({ src: '', alt: '' });
+            setSelectedFile(null);
+            setIsAdding(false);
+        }
     };
 
     return (
@@ -279,13 +317,42 @@ function GalleryManager({
                 <form onSubmit={handleSubmit} className="mb-8 p-6 bg-slate-50 rounded-xl border border-slate-200">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Upload Image (Recommended)</label>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                className="w-full px-3 py-2 border rounded-md bg-white"
+                                onChange={e => {
+                                    if (e.target.files && e.target.files[0]) {
+                                        setSelectedFile(e.target.files[0]);
+                                        // Clear URL if file is selected to avoid confusion
+                                        setFormData(prev => ({ ...prev, src: '' }));
+                                    }
+                                }}
+                            />
+                            <p className="text-xs text-slate-500 mt-1">Supports JPG, PNG, WEBP</p>
+                        </div>
+
+                        <div className="md:col-span-2 relative">
+                            <div className="absolute inset-0 flex items-center">
+                                <span className="w-full border-t border-slate-300" />
+                            </div>
+                            <div className="relative flex justify-center text-xs uppercase">
+                                <span className="bg-slate-50 px-2 text-slate-500">Or use URL</span>
+                            </div>
+                        </div>
+
+                        <div className="md:col-span-2">
                             <label className="block text-sm font-medium text-slate-700 mb-1">Image URL</label>
                             <input
-                                required
                                 className="w-full px-3 py-2 border rounded-md"
                                 value={formData.src}
-                                onChange={e => setFormData({ ...formData, src: e.target.value })}
+                                onChange={e => {
+                                    setFormData({ ...formData, src: e.target.value });
+                                    setSelectedFile(null); // Clear file if URL is typed
+                                }}
                                 placeholder="https://example.com/image.jpg"
+                                disabled={!!selectedFile}
                             />
                         </div>
                         <div className="md:col-span-2">
@@ -302,16 +369,28 @@ function GalleryManager({
                     <div className="flex justify-end gap-3 mt-4">
                         <button
                             type="button"
-                            onClick={() => setIsAdding(false)}
+                            onClick={() => {
+                                setIsAdding(false);
+                                setSelectedFile(null);
+                                setFormData({ src: '', alt: '' });
+                            }}
                             className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-md"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                            disabled={isUploading || (!formData.src && !selectedFile)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                         >
-                            Add
+                            {isUploading ? (
+                                <>
+                                    <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                                    Uploading...
+                                </>
+                            ) : (
+                                'Add'
+                            )}
                         </button>
                     </div>
                 </form>
@@ -638,16 +717,54 @@ function TeamManager({
         image: '',
     };
     const [formData, setFormData] = useState(initialFormState);
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [isUploading, setIsUploading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        let imageUrl = formData.image;
+
+        if (selectedFile) {
+            setIsUploading(true);
+            try {
+                const uploadData = new FormData();
+                uploadData.append('image', selectedFile);
+                uploadData.append('description', `${formData.name} - ${formData.role}`);
+                uploadData.append('category', 'team');
+
+                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+                const response = await fetch(`${apiUrl}/images`, {
+                    method: 'POST',
+                    body: uploadData,
+                });
+
+                if (!response.ok) {
+                    throw new Error('Upload failed');
+                }
+
+                const data = await response.json();
+                imageUrl = data.secureUrl || data.url;
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Failed to upload image. Please try again.');
+                setIsUploading(false);
+                return;
+            } finally {
+                setIsUploading(false);
+            }
+        }
+
+        const finalData = { ...formData, image: imageUrl };
+
         if (editingId) {
-            onUpdate(editingId, formData);
+            onUpdate(editingId, finalData);
             setEditingId(null);
         } else {
-            onAdd(formData);
+            onAdd(finalData);
         }
         setFormData(initialFormState);
+        setSelectedFile(null);
         setIsAdding(false);
     };
 
@@ -657,6 +774,7 @@ function TeamManager({
         setFormData(rest);
         setEditingId(item.id);
         setIsAdding(true);
+        setSelectedFile(null);
     };
 
     return (
@@ -688,14 +806,59 @@ function TeamManager({
                             <label className="block text-sm font-medium text-slate-700 mb-1">Description</label>
                             <input required className="w-full px-3 py-2 border rounded-md" value={formData.description} onChange={e => setFormData({ ...formData, description: e.target.value })} placeholder="e.g. 3rd Year, CS" />
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Image (Initials or URL)</label>
-                            <input required className="w-full px-3 py-2 border rounded-md" value={formData.image} onChange={e => setFormData({ ...formData, image: e.target.value })} placeholder="JD or https://..." />
+
+                        <div className="md:col-span-2 border-t pt-4 mt-2">
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Upload Photo (Recommended)</label>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        className="w-full px-3 py-2 border rounded-md bg-white"
+                                        onChange={e => {
+                                            if (e.target.files && e.target.files[0]) {
+                                                setSelectedFile(e.target.files[0]);
+                                                // Clear text input to avoid confusion, or leave it as preview if you implemented preview logic
+                                                // setFormData(prev => ({ ...prev, image: '' })); 
+                                            }
+                                        }}
+                                    />
+                                    <p className="text-xs text-slate-500 mt-1">Supports JPG, PNG, WEBP</p>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-slate-700 mb-1">Or use Image URL / Initials</label>
+                                    <input
+                                        required={!selectedFile}
+                                        className="w-full px-3 py-2 border rounded-md"
+                                        value={formData.image}
+                                        onChange={e => {
+                                            setFormData({ ...formData, image: e.target.value });
+                                            setSelectedFile(null);
+                                        }}
+                                        placeholder="JD or https://..."
+                                        disabled={!!selectedFile}
+                                    />
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                     <div className="flex justify-end gap-3 mt-4">
-                        <button type="button" onClick={() => { setIsAdding(false); setEditingId(null); setFormData(initialFormState); }} className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-md">Cancel</button>
-                        <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">{editingId ? 'Update Member' : 'Add Member'}</button>
+                        <button type="button" onClick={() => { setIsAdding(false); setEditingId(null); setFormData(initialFormState); setSelectedFile(null); }} className="px-4 py-2 text-slate-600 hover:bg-slate-200 rounded-md">Cancel</button>
+                        <button
+                            type="submit"
+                            disabled={isUploading || (!formData.image && !selectedFile)}
+                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 flex items-center gap-2"
+                        >
+                            {isUploading ? (
+                                <>
+                                    <span className="w-4 h-4 border-2 border-white/50 border-t-white rounded-full animate-spin" />
+                                    {editingId ? 'Updating...' : 'Uploading...'}
+                                </>
+                            ) : (
+                                editingId ? 'Update Member' : 'Add Member'
+                            )}
+                        </button>
                     </div>
                 </form>
             )}
@@ -703,8 +866,8 @@ function TeamManager({
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {teamMembers.map((item) => (
                     <div key={item.id} className="flex items-center gap-3 p-4 border rounded-lg hover:bg-slate-50">
-                        <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600">
-                            {item.image.length <= 3 ? item.image : <img src={item.image} alt={item.name} className="w-full h-full rounded-full object-cover" />}
+                        <div className="w-12 h-12 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600 overflow-hidden">
+                            {item.image.length <= 3 ? item.image : <img src={item.image} alt={item.name} className="w-full h-full object-cover" />}
                         </div>
                         <div className="flex-1 min-w-0">
                             <h3 className="font-semibold truncate">{item.name}</h3>
