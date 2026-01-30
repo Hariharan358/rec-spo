@@ -24,7 +24,7 @@ const App = () => (
           <ScrollProgress />
           <Navigation />
           <Routes>
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/HeadOffice" element={<Admin />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/" element={<Index />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

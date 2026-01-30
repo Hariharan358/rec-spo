@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -121,7 +121,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Barlow', sans-serif;
     background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
     background-size: 50px 50px;
@@ -134,7 +134,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Teko', sans-serif;
     @apply tracking-wide;
   }
 }
@@ -1282,9 +1282,9 @@
   display: flex;
   white-space: nowrap;
   text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Teko', sans-serif;
   font-size: 4rem;
-  font-weight: bold;
+  font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   background: linear-gradient(135deg, hsl(270 70% 60%) 0%, hsl(270 80% 70%) 50%, hsl(45 93% 47%) 100%);
@@ -1317,8 +1317,8 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-family: 'Bebas Neue', sans-serif;
-  font-weight: bold;
+  font-family: 'Teko', sans-serif;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   position: relative;
@@ -1398,4 +1398,81 @@
   .scroller span {
     padding: 0 3rem;
   }
+}
+/* Enhanced Parallax Effects */
+.parallax-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.parallax-back {
+  transform: translateZ(-300px) scale(1.3);
+}
+
+.parallax-mid {
+  transform: translateZ(-150px) scale(1.15);
+}
+
+.parallax-front {
+  transform: translateZ(0);
+}
+
+/* Smooth parallax scrolling */
+.smooth-parallax {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Enhanced floating animations with parallax */
+.parallax-float {
+  animation: parallax-float 8s ease-in-out infinite;
+}
+
+@keyframes parallax-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-10px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-15px) translateX(8px) rotate(1deg);
+  }
+}
+
+/* Parallax text reveal */
+.parallax-text-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.parallax-text-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced depth layers */
+.depth-layer-1 {
+  transform: translateZ(-100px) scale(1.1);
+}
+
+.depth-layer-2 {
+  transform: translateZ(-200px) scale(1.2);
+}
+
+.depth-layer-3 {
+  transform: translateZ(-300px) scale(1.3);
 }

@@ -5,9 +5,62 @@ import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/Scr
 import { AnimatedHeading } from "@/components/ui/AnimatedText";
 import { FloatingElement, MorphingShape, GlowOrb } from "@/components/ui/FloatingElements";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import CircularGallery from "@/component/CircularGallery";
 
 export const SportsSection = () => {
   const { sports } = useData();
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Transform sports data for CircularGallery
+  const galleryItems = sports.map(sport => ({
+    image: sport.image,
+    text: sport.name
+  }));
+
+  // Responsive configuration
+  const getResponsiveConfig = () => {
+    if (windowWidth < 640) { // Mobile
+      return {
+        bend: 1,
+        scrollSpeed: 1.2,
+        scrollEase: 0.5,
+        font: '500 18px Teko'
+      };
+    } else if (windowWidth < 768) { // Small tablet
+      return {
+        bend: 1.5,
+        scrollSpeed: 1.5,
+        scrollEase: 0.08,
+        font: '500 22px Teko'
+      };
+    } else if (windowWidth < 1024) { // Tablet
+      return {
+        bend: 2,
+        scrollSpeed: 1.8,
+        scrollEase: 0.06,
+        font: '500 26px Teko'
+      };
+    } else { // Desktop
+      return {
+        bend: 3,
+        scrollSpeed: 2,
+        scrollEase: 0.05,
+        font: '500 30px Teko'
+      };
+    }
+  };
+
+  const config = getResponsiveConfig();
 
   return (
     <section id="sports" className="py-20 md:py-28 bg-muted relative overflow-hidden">
@@ -45,68 +98,60 @@ export const SportsSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Enhanced Sports Grid */}
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.15} initialDelay={0.6}>
+        {/* Circular Gallery for Sports */}
+        <ScrollReveal direction="up" delay={0.8}>
+          <div className="mb-16 relative h-[350px] sm:h-[450px] md:h-[550px] lg:h-[650px] xl:h-[700px]">
+            <CircularGallery 
+              items={galleryItems}
+              bend={config.bend} 
+              textColor="#ffffff" 
+              borderRadius={0.05} 
+              scrollSpeed={config.scrollSpeed}
+              scrollEase={config.scrollEase}
+              font={config.font}
+            />
+          </div>
+        </ScrollReveal>
+
+        {/* Sports Details Grid - Additional Information */}
+        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16" staggerDelay={0.1} initialDelay={1.0}>
           {sports.map((sport, index) => (
             <StaggerItem key={sport.id}>
-              <CardContainer className="inter-var" containerClassName="py-10">
-                <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-auto h-auto rounded-xl p-6 border transition-all duration-500 hover-lift">
-                  <CardItem
-                    translateZ="50"
-                    className="text-xl font-bold text-neutral-600 dark:text-white gradient-text"
-                  >
-                    {sport.name}
-                  </CardItem>
-                  <CardItem
-                    as="p"
-                    translateZ="60"
-                    className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300 flex items-center gap-1"
-                  >
-                    <MapPin className="w-3 h-3 animate-pulse" /> {sport.venue}
-                  </CardItem>
-                  <CardItem translateZ="100" className="w-full mt-4 overflow-hidden rounded-xl">
-                    <motion.img
-                      src={sport.image}
-                      height="1000"
-                      width="1000"
-                      className="h-60 w-full object-cover group-hover/card:shadow-xl transition-all duration-500"
-                      alt={sport.name}
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </CardItem>
-
-                  {/* Enhanced Additional Info / Footer */}
-                  <div className="flex justify-between items-center mt-10">
-                    <CardItem
-                      translateZ={20}
-                      className="flex items-center gap-2 text-xs font-normal dark:text-white"
-                    >
-                      <User className="w-3 h-3 animate-pulse" /> {sport.members} Members
-                    </CardItem>
-                    <CardItem
-                      translateZ={20}
-                      as={motion.button}
-                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-violet to-secondary text-white text-xs font-bold hover-bounce"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Join Team
-                    </CardItem>
+              <motion.div 
+                className="glass-card p-6 backdrop-blur-sm border border-white/10 hover-glow"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-bold text-lg gradient-text">{sport.name}</h3>
+                  <span className="flex items-center gap-1 text-yellow-600 font-semibold">
+                    <Star className="w-4 h-4 fill-current" /> {sport.rating}
+                  </span>
+                </div>
+                
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-secondary" />
+                    <span>{sport.venue}</span>
                   </div>
-
-                  <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <CardItem translateZ={30} className="flex items-center justify-between text-xs text-neutral-500">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 animate-pulse" /> {sport.schedule}
-                      </span>
-                      <span className="flex items-center gap-1 font-semibold text-yellow-600">
-                        <Star className="w-3 h-3 fill-current animate-pulse-glow" /> {sport.rating}
-                      </span>
-                    </CardItem>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 text-secondary" />
+                    <span>{sport.schedule}</span>
                   </div>
-                </CardBody>
-              </CardContainer>
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4 text-secondary" />
+                    <span>{sport.members} Active Members</span>
+                  </div>
+                </div>
+
+                <motion.button 
+                  className="w-full mt-4 px-4 py-2 rounded-lg bg-gradient-to-r from-violet to-secondary text-white font-semibold hover-bounce"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Join {sport.name} Team
+                </motion.button>
+              </motion.div>
             </StaggerItem>
           ))}
         </StaggerContainer>

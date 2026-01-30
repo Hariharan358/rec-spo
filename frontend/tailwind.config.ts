@@ -14,8 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'],
-        display: ['Outfit', 'sans-serif'],
+        sans: ['Barlow', 'Roboto', 'sans-serif'],
+        display: ['Teko', 'Barlow Condensed', 'sans-serif'],
+        body: ['Barlow', 'Roboto', 'sans-serif'],
+        heading: ['Teko', 'Barlow Condensed', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
