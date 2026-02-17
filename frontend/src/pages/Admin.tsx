@@ -17,9 +17,9 @@ export default function Admin() {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+        <div className="min-h-screen text-slate-900 font-sans">
             {/* Header */}
-            <header className="bg-white shadow-sm sticky top-0 z-10">
+            <header className="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-10">
                 <div className="container mx-auto px-4 py-4 flex justify-between items-center">
                     <h1 className="text-xl font-bold text-slate-800">Admin Dashboard</h1>
                     <button

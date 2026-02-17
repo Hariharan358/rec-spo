@@ -17,13 +17,14 @@ const Gallery: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Image Gallery</h1>
-        <p className="text-gray-600">
-          Upload, manage, and browse your image collection
-        </p>
-      </div>
+    <div className="min-h-screen">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold mb-2">Image Gallery</h1>
+          <p className="text-gray-600">
+            Upload, manage, and browse your image collection
+          </p>
+        </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-8">
@@ -55,6 +56,7 @@ const Gallery: React.FC = () => {
           <ImageUpload onUploadComplete={handleUploadComplete} />
         </TabsContent>
       </Tabs>
+      </div>
     </div>
   );
 };
