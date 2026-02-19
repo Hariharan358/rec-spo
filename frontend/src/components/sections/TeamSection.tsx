@@ -61,7 +61,9 @@ export const TeamSection = () => {
   });
 
   return (
-    <section id="team" className="py-20 md:py-28 bg-muted">
+    <section id="team" className="py-20 md:py-28 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
+      {/* Decorative background blob */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">

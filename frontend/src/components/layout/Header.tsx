@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 import { motion, AnimatePresence } from "framer-motion";
 import recLogo from "/rec_logo.png";
 
@@ -81,7 +82,7 @@ export const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-
+            <ModeToggle />
 
             {/* Mobile Menu Toggle */}
             <button

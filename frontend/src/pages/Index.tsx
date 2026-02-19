@@ -10,12 +10,16 @@ import { TeamSection } from "@/components/sections/TeamSection";
 import { GallerySection } from "@/components/sections/GallerySection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import ScrollVelocity from "@/components/ScrollVelocity";
-import { Parallax, ParallaxElement, ParallaxText } from "@/components/ui/Parallax";
+import { Parallax, ParallaxElement } from "@/components/ui/Parallax";
 import { motion } from "framer-motion";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background text-foreground relative selection:bg-violet-500/30">
+      {/* Noise Texture Overlay */}
+      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] mix-blend-overlay"
+        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}></div>
+
       <Header />
       <main>
         <HeroSection />
@@ -34,8 +38,8 @@ const Index = () => {
 
           {/* Enhanced ScrollVelocity Effect between sections */}
           <Parallax speed={0.2}>
-            <motion.div 
-              className="bg-gradient-to-r from-violet/20 via-secondary/30 to-violet/20 py-4 relative overflow-hidden"
+            <motion.div
+              className="bg-gradient-to-r from-violet/20 via-secondary/30 to-violet/20 py-4 relative overflow-hidden my-12"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -43,7 +47,7 @@ const Index = () => {
             >
               {/* Background glow effect */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet/10 to-transparent animate-shimmer" />
-              
+
               <ScrollVelocity
                 texts={['REC SPORTS CLUB', 'RAJALAKSHMI ENGINEERING COLLEGE', 'CHAMPIONS LEAGUE']}
                 velocity={75}
@@ -57,9 +61,7 @@ const Index = () => {
             <div className="w-16 h-16 bg-gradient-to-r from-violet/20 to-secondary/20 rounded-full blur-md" />
           </ParallaxElement>
 
-          <Parallax speed={0.15}>
-            <SportsSection />
-          </Parallax>
+          <SportsSection />
 
           <ParallaxElement speed={0.25} className="absolute top-[1200px] right-10 z-0">
             <div className="w-40 h-40 bg-gradient-to-r from-secondary/10 to-violet/10 rounded-full blur-2xl" />
@@ -71,8 +73,8 @@ const Index = () => {
 
           {/* Another Enhanced ScrollVelocity Effect */}
           <Parallax speed={0.3}>
-            <motion.div 
-              className="bg-gradient-to-r from-secondary/20 via-violet/30 to-secondary/20 py-6 relative overflow-hidden"
+            <motion.div
+              className="bg-gradient-to-r from-secondary/20 via-violet/30 to-secondary/20 py-6 relative overflow-hidden my-12"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}

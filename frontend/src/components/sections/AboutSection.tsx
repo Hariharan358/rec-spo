@@ -2,6 +2,8 @@ import { Target, Eye, Users, Award } from "lucide-react";
 import { ScrollReveal, StaggerContainer, StaggerItem } from "@/components/ui/ScrollReveal";
 import { AnimatedHeading, AnimatedCounter } from "@/components/ui/AnimatedText";
 import { FloatingElement, ParticleSystem } from "@/components/ui/FloatingElements";
+import { TechCard } from "@/components/ui/TechCard";
+import CardSwap, { Card } from "@/component/CardSwap";
 
 export const AboutSection = () => {
   return (
@@ -38,7 +40,7 @@ export const AboutSection = () => {
               <p className="text-muted-foreground leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
                 Our state-of-the-art facilities, experienced coaches, and dedicated training programs have produced numerous national and state-level athletes. We believe that sports build character, discipline, and leadership qualities that extend far beyond the playing field.
               </p>
-              
+
               {/* Enhanced Stats Grid */}
               <StaggerContainer className="grid grid-cols-2 gap-4 pt-4" staggerDelay={0.1} initialDelay={1}>
                 {[
@@ -47,16 +49,18 @@ export const AboutSection = () => {
                   { value: 6, suffix: "", label: "Sports Categories" },
                   { value: 15, suffix: "+", label: "Expert Coaches" },
                 ].map((stat, index) => (
-                  <StaggerItem key={stat.label} className="card-sports p-4 hover-lift group">
-                    <div className="font-display text-3xl text-secondary group-hover:animate-pulse-scale">
-                      <AnimatedCounter 
-                        end={stat.value} 
-                        suffix={stat.suffix}
-                        duration={2}
-                        delay={1.2 + index * 0.1}
-                      />
-                    </div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <StaggerItem key={stat.label} className="group">
+                    <TechCard className="p-4 border-none bg-violet-50/50 dark:bg-white/5 shadow-none hover:bg-violet-100/50 dark:hover:bg-white/10 transition-colors">
+                      <div className="font-display text-3xl text-violet-600 dark:text-violet-400 group-hover:animate-pulse-scale">
+                        <AnimatedCounter
+                          end={stat.value}
+                          suffix={stat.suffix}
+                          duration={2}
+                          delay={1.2 + index * 0.1}
+                        />
+                      </div>
+                      <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    </TechCard>
                   </StaggerItem>
                 ))}
               </StaggerContainer>
@@ -65,30 +69,55 @@ export const AboutSection = () => {
 
           {/* Right - Vision & Mission */}
           <ScrollReveal direction="right" delay={0.6}>
-            <div className="space-y-6">
-              <div className="card-sports p-6 md:p-8 hover-tilt group">
-                <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:animate-bounce">
-                  <Eye className="w-7 h-7 text-secondary group-hover:animate-pulse-glow" />
-                </div>
-                <h4 className="font-display text-2xl text-foreground tracking-wider mb-3 gradient-text">
-                  OUR VISION
-                </h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  To be the leading college sports club that nurtures athletic excellence while developing well-rounded individuals who excel in sports and life.
-                </p>
-              </div>
-
-              <div className="card-sports p-6 md:p-8 hover-tilt group">
-                <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:animate-bounce">
-                  <Target className="w-7 h-7 text-secondary group-hover:animate-pulse-glow" />
-                </div>
-                <h4 className="font-display text-2xl text-foreground tracking-wider mb-3 gradient-text">
-                  OUR MISSION
-                </h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  To provide world-class sports training, promote physical fitness, foster team spirit, and create opportunities for students to compete and excel at national and international levels.
-                </p>
-              </div>
+            <div className="relative h-[600px] w-full flex items-center justify-center lg:translate-x-10">
+              <CardSwap
+                cardDistance={60}
+                verticalDistance={40}
+                delay={4000}
+                pauseOnHover={true}
+                width="100%"
+                height="auto"
+              >
+                <Card customClass="p-0 border-none bg-transparent shadow-none">
+                  <TechCard className="p-6 md:p-8 w-full h-[400px] flex flex-col justify-center">
+                    <div className="w-14 h-14 rounded-xl bg-violet-100 dark:bg-violet-900/10 flex items-center justify-center mb-4 border border-violet-500/20">
+                      <Eye className="w-7 h-7 text-violet-600 dark:text-violet-400 animate-pulse-glow" />
+                    </div>
+                    <h4 className="font-display text-3xl text-foreground tracking-wider mb-4">
+                      OUR <span className="text-violet-600 dark:text-violet-400">VISION</span>
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed text-base font-light">
+                      To be the leading college sports club that nurtures athletic excellence while developing well-rounded individuals who excel in sports and life.
+                    </p>
+                  </TechCard>
+                </Card>
+                <Card customClass="p-0 border-none bg-transparent shadow-none">
+                  <TechCard className="p-6 md:p-8 w-full h-[400px] flex flex-col justify-center">
+                    <div className="w-14 h-14 rounded-xl bg-violet-100 dark:bg-violet-900/10 flex items-center justify-center mb-4 border border-violet-500/20">
+                      <Target className="w-7 h-7 text-violet-600 dark:text-violet-400 animate-pulse-glow" />
+                    </div>
+                    <h4 className="font-display text-3xl text-foreground tracking-wider mb-4">
+                      OUR <span className="text-violet-600 dark:text-violet-400">MISSION</span>
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed text-base font-light">
+                      To provide world-class sports training, promote physical fitness, foster team spirit, and create opportunities for students to compete and excel at national and international levels.
+                    </p>
+                  </TechCard>
+                </Card>
+                <Card customClass="p-0 border-none bg-transparent shadow-none">
+                  <TechCard className="p-6 md:p-8 w-full h-[400px] flex flex-col justify-center">
+                    <div className="w-14 h-14 rounded-xl bg-violet-100 dark:bg-violet-900/10 flex items-center justify-center mb-4 border border-violet-500/20">
+                      <Award className="w-7 h-7 text-violet-600 dark:text-violet-400 animate-pulse-glow" />
+                    </div>
+                    <h4 className="font-display text-3xl text-foreground tracking-wider mb-4">
+                      OUR <span className="text-violet-600 dark:text-violet-400">VALUES</span>
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed text-base font-light">
+                      We prioritize integrity, discipline, teamwork, and inclusivity, creating an environment where every student athlete feels valued, empowered, and inspired to reach their full potential.
+                    </p>
+                  </TechCard>
+                </Card>
+              </CardSwap>
             </div>
           </ScrollReveal>
         </div>
@@ -99,20 +128,57 @@ export const AboutSection = () => {
             <AnimatedHeading className="font-display text-2xl md:text-3xl text-foreground tracking-wider text-center mb-8" delay={1}>
               CLUB LEADERSHIP
             </AnimatedHeading>
-            <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.15} initialDelay={1.2}>
-              {[
-                { name: "Dr.M.Vijayaragavan", role: "Director Of Physical Education", icon: Users },
-                { name: "Ms.Renuga", role: "Sports Director", icon: Award },
-              ].map((person, index) => (
-                <StaggerItem key={person.name} className="text-center group">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-r from-violet to-secondary mx-auto mb-4 flex items-center justify-center group-hover:animate-pulse-scale hover-bounce">
-                    <person.icon className="w-8 h-8 text-white group-hover:animate-wave" />
-                  </div>
-                  <h4 className="font-semibold text-foreground group-hover:gradient-text transition-all duration-300">{person.name}</h4>
-                  <p className="text-sm text-muted-foreground">{person.role}</p>
-                </StaggerItem>
-              ))}
-            </StaggerContainer>
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              {/* Left Column - Image */}
+              <ScrollReveal direction="right" delay={1}>
+                <div className="relative h-full min-h-[400px] flex items-center justify-center">
+                  <div className="absolute inset-0 bg-violet-500/10 blur-3xl rounded-full" />
+                  <img
+                    src="https://images.unsplash.com/photo-1552674605-46d536d2e613?auto=format&fit=crop&q=80&w=800"
+                    alt="Runner Sprinting"
+                    className="relative z-10 w-full max-w-[500px] object-contain drop-shadow-2xl opacity-90 hover:scale-105 transition-transform duration-700 mix-blend-luminosity hover:mix-blend-normal"
+                  />
+                </div>
+              </ScrollReveal>
+
+              {/* Right Column - Leadership Cards */}
+              <StaggerContainer className="flex flex-col gap-6" staggerDelay={0.15} initialDelay={1.2}>
+                {[
+                  { name: "Dr.M.Vijayaragavan", role: "Director Of Physical Education", id: "REC-DIR-01", icon: Users },
+                  { name: "Ms.Renuga", role: "Sports Director", id: "REC-SPT-02", icon: Award },
+                ].map((person, index) => (
+                  <StaggerItem key={person.name} className="group w-full">
+                    <TechCard className="p-6 md:p-8 flex items-center gap-6 bg-white/50 dark:bg-[#0a0a0a]/80 backdrop-blur-sm border border-black/40 dark:border-violet-500/10 hover:border-violet-500/40 text-left">
+
+                      {/* Avatar */}
+                      <div className="relative shrink-0">
+                        <div className="absolute inset-0 bg-violet-500/20 blur-xl rounded-full group-hover:bg-violet-500/30 transition-all duration-500" />
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-white to-violet-50 dark:from-neutral-900 dark:to-neutral-800 border-2 border-violet-500/20 flex items-center justify-center relative z-10 group-hover:scale-105 transition-transform duration-500">
+                          <person.icon className="w-8 h-8 text-violet-600 dark:text-violet-400 group-hover:text-violet-500 transition-colors" />
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="font-display text-xl md:text-2xl text-foreground group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors truncate">
+                            {person.name}
+                          </h4>
+                          <span className="text-[10px] font-mono text-violet-400 opacity-60 ml-2 shrink-0">
+                            [{person.id}]
+                          </span>
+                        </div>
+
+                        <div className="h-px w-12 bg-violet-500/30 my-2 group-hover:w-full transition-all duration-500" />
+
+                        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground truncate">
+                          {person.role}
+                        </p>
+                      </div>
+                    </TechCard>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
+            </div>
           </div>
         </ScrollReveal>
       </div>

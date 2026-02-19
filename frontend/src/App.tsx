@@ -13,24 +13,29 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <DataProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollProgress />
-          <Navigation />
-          <Routes>
-            <Route path="/HeadOffice" element={<Admin />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <Toaster />
+          <Sonner />
+          <CustomCursor />
+          <BrowserRouter>
+            <ScrollProgress />
+            <Navigation />
+            <Routes>
+              <Route path="/HeadOffice" element={<Admin />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/" element={<Index />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       </DataProvider>
     </TooltipProvider>
   </QueryClientProvider>

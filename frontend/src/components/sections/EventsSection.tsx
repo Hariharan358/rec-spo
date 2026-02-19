@@ -2,6 +2,7 @@ import { Calendar, MapPin, Clock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useData } from "@/context/DataContext";
+import { TechCard } from "@/components/ui/TechCard";
 
 const pastEvents = [
   { title: "State Football Championship", result: "Winners 🏆" },
@@ -42,16 +43,16 @@ export const EventsSection = () => {
 
             <div className="space-y-4">
               {events.map((event) => (
-                <div
+                <TechCard
                   key={event.id}
-                  className="card-sports p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4"
+                  className="p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-4"
                 >
                   {/* Date Badge */}
-                  <div className="w-20 h-20 shrink-0 bg-primary rounded-xl flex flex-col items-center justify-center text-primary-foreground">
-                    <span className="font-display text-2xl">
+                  <div className="w-20 h-20 shrink-0 bg-violet-100 dark:bg-violet-900/10 border border-violet-500/20 rounded-xl flex flex-col items-center justify-center text-violet-600 dark:text-violet-400 group-hover:bg-violet-200 dark:group-hover:bg-violet-900/20 transition-colors">
+                    <span className="font-display text-2xl font-bold">
                       {event.date.split(" ")[1]?.split("-")[0] || event.date.split(" ")[1]}
                     </span>
-                    <span className="text-xs uppercase">
+                    <span className="text-xs uppercase font-mono tracking-wider">
                       {event.date.split(" ")[0]}
                     </span>
                   </div>
@@ -59,22 +60,22 @@ export const EventsSection = () => {
                   {/* Event Details */}
                   <div className="flex-1 space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h4 className="font-semibold text-foreground">{event.title}</h4>
-                      <Badge variant={event.status === "Registration Open" ? "default" : "secondary"}>
+                      <h4 className="font-display text-xl text-foreground tracking-wide">{event.title}</h4>
+                      <Badge variant={event.status === "Registration Open" ? "default" : "secondary"} className="bg-violet-100 dark:bg-violet-900/20 text-violet-600 dark:text-violet-300 border-violet-500/20 hover:bg-violet-200 dark:hover:bg-violet-900/40">
                         {event.status}
                       </Badge>
                     </div>
-                    <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                    <div className="flex flex-wrap gap-4 text-xs font-mono text-muted-foreground">
                       <span className="flex items-center gap-1">
-                        <Calendar className="w-4 h-4" />
+                        <Calendar className="w-3 h-3 text-violet-500" />
                         {event.date}
                       </span>
                       <span className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
+                        <Clock className="w-3 h-3 text-violet-500" />
                         {event.time}
                       </span>
                       <span className="flex items-center gap-1">
-                        <MapPin className="w-4 h-4" />
+                        <MapPin className="w-3 h-3 text-violet-500" />
                         {event.venue}
                       </span>
                     </div>
@@ -83,16 +84,16 @@ export const EventsSection = () => {
                   {/* Action */}
                   {event.status === "Registration Open" && (
                     <Button
-                      variant="athletic"
+                      variant="outline"
                       size="sm"
                       onClick={scrollToRegister}
-                      className="shrink-0"
+                      className="shrink-0 border-violet-500/20 text-violet-600 dark:text-violet-400 hover:bg-violet-100 dark:hover:bg-violet-900/20 hover:text-foreground font-mono uppercase text-xs tracking-wider"
                     >
                       Register
-                      <ArrowRight className="w-4 h-4 ml-1" />
+                      <ArrowRight className="w-3 h-3 ml-2" />
                     </Button>
                   )}
-                </div>
+                </TechCard>
               ))}
             </div>
           </div>

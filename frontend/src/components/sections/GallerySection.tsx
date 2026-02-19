@@ -10,7 +10,7 @@ export const GallerySection = () => {
   }));
 
   return (
-    <section id="gallery" className="py-20 md:py-28 bg-background overflow-hidden">
+    <section id="gallery" className="py-20 md:py-28 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-background to-background overflow-hidden relative">
       <div className="container mx-auto px-4 mb-12">
         {/* Section Header */}
         <div className="text-center">
