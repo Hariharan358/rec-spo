@@ -1,5 +1,6 @@
 import { useData } from "@/context/DataContext";
 import ChromaGrid, { ChromaItem } from "@/component/ChromaGrid";
+import { motion } from "framer-motion";
 
 // Pre-defined styles to cycle through for visual variety
 const styleVariants = [
@@ -63,23 +64,68 @@ export const TeamSection = () => {
   return (
     <section id="team" className="py-20 md:py-28 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
       {/* Decorative background blob */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-violet-500/10 rounded-full blur-[120px] pointer-events-none"
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.4, 0.7, 0.4],
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block text-secondary font-semibold text-sm uppercase tracking-widest mb-3">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <motion.span
+            className="inline-block text-secondary font-semibold text-sm uppercase tracking-widest mb-3"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             Meet the Titans
-          </span>
-          <h2 className="section-heading text-foreground">
+          </motion.span>
+          <motion.h2
+            className="section-heading text-foreground"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             OUR <span className="text-gradient">TEAM</span>
-          </h2>
-          <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p
+            className="text-muted-foreground mt-4 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+          >
             Dedicated leaders and athletes working together to achieve sporting excellence.
-          </p>
-        </div>
+          </motion.p>
+          {/* Animated divider */}
+          <motion.div
+            className="mx-auto mt-6 h-[2px] bg-gradient-to-r from-transparent via-violet-500/60 to-transparent"
+            initial={{ width: 0, opacity: 0 }}
+            whileInView={{ width: 160, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          />
+        </motion.div>
 
         {/* ChromaGrid Team Display */}
-        <div style={{ minHeight: '800px', position: 'relative' }}>
+        <motion.div
+          style={{ minHeight: '800px', position: 'relative' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        >
           <ChromaGrid
             items={formattedItems}
             radius={300}
@@ -87,7 +133,7 @@ export const TeamSection = () => {
             fadeOut={0.6}
             ease="power3.out"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -15,26 +15,29 @@ const queryClient = new QueryClient();
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <DataProvider>
         <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-          <Toaster />
-          <Sonner />
-          <CustomCursor />
-          <BrowserRouter>
-            <ScrollProgress />
-            <Navigation />
-            <Routes>
-              <Route path="/HeadOffice" element={<Admin />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/" element={<Index />} />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <SmoothScroll>
+            <Toaster />
+            <Sonner />
+            <CustomCursor />
+            <BrowserRouter>
+              <ScrollProgress />
+              <Navigation />
+              <Routes>
+                <Route path="/HeadOffice" element={<Admin />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/" element={<Index />} />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </SmoothScroll>
         </ThemeProvider>
       </DataProvider>
     </TooltipProvider>

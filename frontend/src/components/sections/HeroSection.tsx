@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import ScrollVelocity from "@/components/ScrollVelocity";
 import { ParallaxElement, ParallaxText } from "@/components/ui/Parallax";
 import heroImage from "@/assets/hero-sports.jpg";
+import { motion } from "framer-motion";
 
 export const HeroSection = () => {
   const scrollToSection = (href: string) => {
@@ -31,7 +32,7 @@ export const HeroSection = () => {
         <ParallaxElement speed={0.25} className="absolute top-60 left-1/3">
           <div className="w-8 h-8 bg-gradient-to-r from-lavender to-secondary rounded-full opacity-40 animate-float floating-element" style={{ '--delay': '1s' } as React.CSSProperties}></div>
         </ParallaxElement>
-        
+
         {/* Additional parallax elements */}
         <ParallaxElement speed={0.4} className="absolute top-1/3 right-1/4">
           <div className="w-6 h-6 bg-gradient-to-r from-violet/30 to-secondary/30 rounded-full animate-pulse-glow"></div>
@@ -100,24 +101,36 @@ export const HeroSection = () => {
           {/* Enhanced CTA Buttons with Parallax */}
           <ParallaxText delay={0.4}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16 stagger-animation" style={{ '--delay': '0.6s' } as React.CSSProperties}>
-              <Button
-                variant="athletic"
-                size="lg"
-                className="btn-athletic group relative overflow-hidden"
-                onClick={() => scrollToSection("#register")}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
               >
-                Join the Club
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              </Button>
-              <Button
-                variant="hero"
-                size="lg"
-                className="btn-glass group"
-                onClick={() => scrollToSection("#events")}
+                <Button
+                  variant="athletic"
+                  size="lg"
+                  className="btn-athletic group relative overflow-hidden"
+                  onClick={() => scrollToSection("#register")}
+                >
+                  Join the Club
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
               >
-                <Calendar className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                Upcoming Events
-              </Button>
+                <Button
+                  variant="hero"
+                  size="lg"
+                  className="btn-glass group"
+                  onClick={() => scrollToSection("#events")}
+                >
+                  <Calendar className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  Upcoming Events
+                </Button>
+              </motion.div>
             </div>
           </ParallaxText>
 
@@ -129,19 +142,25 @@ export const HeroSection = () => {
                 { icon: Award, value: "50+", label: "Trophies" },
                 { icon: Calendar, value: "20+", label: "Events/Year" },
               ].map((stat, index) => (
-                <div
+                <motion.div
                   key={stat.label}
                   className="card-premium p-6 hover-lift group animate-rotate-in"
                   style={{ '--delay': `${0.9 + index * 0.1}s` } as React.CSSProperties}
+                  whileHover={{ y: -8, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
-                  <div className="w-12 h-12 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <motion.div
+                    className="w-12 h-12 flex items-center justify-center mx-auto mb-4"
+                    whileHover={{ scale: 1.2, rotate: 10 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
                     <stat.icon className="w-8 h-8 text-white/90" />
-                  </div>
+                  </motion.div>
                   <div className="font-display font-bold text-3xl md:text-4xl text-primary-foreground gradient-text">
                     {stat.value}
                   </div>
                   <div className="text-sm text-primary-foreground/70 font-medium">{stat.label}</div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </ParallaxText>
@@ -167,8 +186,8 @@ export const HeroSection = () => {
       {/* Particle Effects with Parallax */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
-          <ParallaxElement 
-            key={i} 
+          <ParallaxElement
+            key={i}
             speed={0.1 + (i % 5) * 0.1}
             className="absolute"
             style={{
