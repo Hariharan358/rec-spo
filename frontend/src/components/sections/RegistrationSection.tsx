@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
+import { useData } from "@/context/DataContext";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters").max(100),
@@ -73,6 +74,7 @@ const formFieldVariant = {
 export const RegistrationSection = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
+  const { addRegistration } = useData();
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -88,8 +90,7 @@ export const RegistrationSection = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    // In a real app, this would send data to a backend
-    console.log("Registration submitted:", data);
+    addRegistration(data);
     setIsSubmitted(true);
     toast({
       title: "Registration Successful! 🎉",

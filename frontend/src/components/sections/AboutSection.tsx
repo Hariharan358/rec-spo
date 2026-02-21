@@ -304,7 +304,7 @@ export const AboutSection = () => {
               <motion.img
                 src="/images/runner.png"
                 alt="Runner Sprinting"
-                className="relative z-10 w-full max-w-[500px] object-contain drop-shadow-2xl opacity-90 mix-blend-luminosity hover:mix-blend-normal"
+                className="relative z-10 w-full max-w-[800px] object-contain mix-blend-normal bg-white/30 backdrop-grayscale"
                 whileHover={{ scale: 1.07, filter: "brightness(1.1)" }}
                 transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               />

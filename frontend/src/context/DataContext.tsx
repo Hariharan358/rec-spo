@@ -53,12 +53,25 @@ export type TeamMember = {
     image: string; // Initials or Image URL
 };
 
+export type Registration = {
+    id: string;
+    name: string;
+    registerNumber: string;
+    department: string;
+    year: string;
+    sport: string;
+    email: string;
+    phone: string;
+    registeredAt: string;
+};
+
 type DataContextType = {
     achievements: Achievement[];
     galleryImages: GalleryImage[];
     sports: Sport[];
     events: Event[];
     teamMembers: TeamMember[];
+    registrations: Registration[];
     addAchievement: (achievement: Omit<Achievement, "id">) => void;
     updateAchievement: (id: string, achievement: Partial<Achievement>) => void;
     deleteAchievement: (id: string) => void;
@@ -73,6 +86,8 @@ type DataContextType = {
     addTeamMember: (member: Omit<TeamMember, "id">) => void;
     updateTeamMember: (id: string, member: Partial<TeamMember>) => void;
     deleteTeamMember: (id: string) => void;
+    addRegistration: (registration: Omit<Registration, "id" | "registeredAt">) => void;
+    deleteRegistration: (id: string) => void;
 };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -265,6 +280,16 @@ const initialTeamMembers: TeamMember[] = [
     },
 ];
 
+const initialRegistrations: Registration[] = [
+    { id: 'r1', name: 'Aarav Sharma', registerNumber: '2024CS001', department: 'Computer Science', year: '2nd Year', sport: 'Cricket', email: 'aarav@college.edu', phone: '9876543210', registeredAt: '2026-01-10T10:30:00' },
+    { id: 'r2', name: 'Ishaan Patel', registerNumber: '2024EC015', department: 'Electronics', year: '1st Year', sport: 'Cricket', email: 'ishaan@college.edu', phone: '9876543211', registeredAt: '2026-01-11T14:00:00' },
+    { id: 'r3', name: 'Meera Nair', registerNumber: '2023ME008', department: 'Mechanical', year: '3rd Year', sport: 'Football', email: 'meera@college.edu', phone: '9876543212', registeredAt: '2026-01-12T09:15:00' },
+    { id: 'r4', name: 'Rohan Gupta', registerNumber: '2024CS022', department: 'Computer Science', year: '2nd Year', sport: 'Basketball', email: 'rohan@college.edu', phone: '9876543213', registeredAt: '2026-01-13T11:00:00' },
+    { id: 'r5', name: 'Ananya Singh', registerNumber: '2023EE005', department: 'Electrical', year: '3rd Year', sport: 'Badminton', email: 'ananya@college.edu', phone: '9876543214', registeredAt: '2026-01-14T16:30:00' },
+    { id: 'r6', name: 'Kabir Reddy', registerNumber: '2025CI003', department: 'Civil', year: '1st Year', sport: 'Volleyball', email: 'kabir@college.edu', phone: '9876543215', registeredAt: '2026-01-15T08:45:00' },
+    { id: 'r7', name: 'Diya Iyer', registerNumber: '2024SC010', department: 'Science', year: '2nd Year', sport: 'Table Tennis', email: 'diya@college.edu', phone: '9876543216', registeredAt: '2026-01-16T13:20:00' },
+    { id: 'r8', name: 'Vivaan Joshi', registerNumber: '2023CS030', department: 'Computer Science', year: '3rd Year', sport: 'Cricket', email: 'vivaan@college.edu', phone: '9876543217', registeredAt: '2026-01-17T10:00:00' },
+];
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     // Load from local storage if available, else use initial
@@ -293,6 +318,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return saved ? JSON.parse(saved) : initialTeamMembers;
     });
 
+    const [registrations, setRegistrations] = useState<Registration[]>(() => {
+        const saved = localStorage.getItem('registrations');
+        return saved ? JSON.parse(saved) : initialRegistrations;
+    });
+
     // Effects to save to local storage
     useEffect(() => {
         localStorage.setItem('achievements', JSON.stringify(achievements));
@@ -313,6 +343,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     useEffect(() => {
         localStorage.setItem('teamMembers', JSON.stringify(teamMembers));
     }, [teamMembers]);
+
+    useEffect(() => {
+        localStorage.setItem('registrations', JSON.stringify(registrations));
+    }, [registrations]);
 
     const addAchievement = (achievement: Omit<Achievement, "id">) => {
         setAchievements([...achievements, { ...achievement, id: crypto.randomUUID() }]);
@@ -370,6 +404,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setTeamMembers(teamMembers.filter(m => m.id !== id));
     };
 
+    const addRegistration = (registration: Omit<Registration, "id" | "registeredAt">) => {
+        setRegistrations([...registrations, { ...registration, id: crypto.randomUUID(), registeredAt: new Date().toISOString() }]);
+    };
+
+    const deleteRegistration = (id: string) => {
+        setRegistrations(registrations.filter(r => r.id !== id));
+    };
+
     return (
         <DataContext.Provider value={{
             achievements,
@@ -377,6 +419,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             sports,
             events,
             teamMembers,
+            registrations,
             addAchievement,
             updateAchievement,
             deleteAchievement,
@@ -391,6 +434,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             addTeamMember,
             updateTeamMember,
             deleteTeamMember,
+            addRegistration,
+            deleteRegistration,
         }}>
             {children}
         </DataContext.Provider>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useData, Achievement, GalleryImage, Sport, Event, TeamMember } from '@/context/DataContext';
-import { Trash2, Plus, GripVertical, Save, X, Edit2 } from 'lucide-react';
+import { useData, Achievement, GalleryImage, Sport, Event, TeamMember, Registration } from '@/context/DataContext';
+import { Trash2, Plus, GripVertical, Save, X, Edit2, Search, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { ServerStatus } from '@/components/ServerStatus';
 
@@ -10,10 +10,11 @@ export default function Admin() {
         galleryImages, addGalleryImage, deleteGalleryImage,
         sports, addSport, updateSport, deleteSport,
         events, addEvent, updateEvent, deleteEvent,
-        teamMembers, addTeamMember, updateTeamMember, deleteTeamMember
+        teamMembers, addTeamMember, updateTeamMember, deleteTeamMember,
+        registrations, deleteRegistration
     } = useData();
 
-    const [activeTab, setActiveTab] = useState<'achievements' | 'gallery' | 'sports' | 'events' | 'team'>('achievements');
+    const [activeTab, setActiveTab] = useState<'achievements' | 'gallery' | 'sports' | 'events' | 'team' | 'registrations'>('achievements');
     const navigate = useNavigate();
 
     return (
@@ -39,7 +40,7 @@ export default function Admin() {
 
                 {/* Tabs */}
                 <div className="flex space-x-1 bg-slate-200 p-1 rounded-lg mb-8 w-fit overflow-x-auto">
-                    {(['achievements', 'gallery', 'sports', 'events', 'team'] as const).map((tab) => (
+                    {(['achievements', 'gallery', 'sports', 'events', 'team', 'registrations'] as const).map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -92,6 +93,12 @@ export default function Admin() {
                             onAdd={addTeamMember}
                             onUpdate={updateTeamMember}
                             onDelete={deleteTeamMember}
+                        />
+                    )}
+                    {activeTab === 'registrations' && (
+                        <RegistrationsManager
+                            registrations={registrations}
+                            onDelete={deleteRegistration}
                         />
                     )}
                 </div>
@@ -884,6 +891,238 @@ function TeamManager({
                     </div>
                 ))}
             </div>
+        </div>
+    );
+}
+
+function RegistrationsManager({
+    registrations, onDelete
+}: {
+    registrations: Registration[],
+    onDelete: (id: string) => void
+}) {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [expandedSports, setExpandedSports] = useState<Set<string>>(new Set());
+
+    // Get unique sports from registrations
+    const sportNames = Array.from(new Set(registrations.map(r => r.sport))).sort();
+
+    // Filter registrations by search query
+    const filteredRegistrations = registrations.filter(r => {
+        if (!searchQuery) return true;
+        const q = searchQuery.toLowerCase();
+        return (
+            r.name.toLowerCase().includes(q) ||
+            r.registerNumber.toLowerCase().includes(q) ||
+            r.department.toLowerCase().includes(q) ||
+            r.year.toLowerCase().includes(q) ||
+            r.sport.toLowerCase().includes(q) ||
+            r.email.toLowerCase().includes(q) ||
+            r.phone.includes(q)
+        );
+    });
+
+    // Group filtered registrations by sport
+    const groupedBySport: Record<string, Registration[]> = {};
+    filteredRegistrations.forEach(r => {
+        if (!groupedBySport[r.sport]) groupedBySport[r.sport] = [];
+        groupedBySport[r.sport].push(r);
+    });
+
+    const toggleSport = (sport: string) => {
+        setExpandedSports(prev => {
+            const next = new Set(prev);
+            if (next.has(sport)) {
+                next.delete(sport);
+            } else {
+                next.add(sport);
+            }
+            return next;
+        });
+    };
+
+    const expandAll = () => {
+        setExpandedSports(new Set(Object.keys(groupedBySport)));
+    };
+
+    const collapseAll = () => {
+        setExpandedSports(new Set());
+    };
+
+    const sportColors: Record<string, string> = {
+        'Cricket': 'border-green-500 bg-green-50',
+        'Football': 'border-blue-500 bg-blue-50',
+        'Basketball': 'border-orange-500 bg-orange-50',
+        'Badminton': 'border-purple-500 bg-purple-50',
+        'Volleyball': 'border-red-500 bg-red-50',
+        'Table Tennis': 'border-teal-500 bg-teal-50',
+    };
+
+    const sportBadgeColors: Record<string, string> = {
+        'Cricket': 'bg-green-100 text-green-700',
+        'Football': 'bg-blue-100 text-blue-700',
+        'Basketball': 'bg-orange-100 text-orange-700',
+        'Badminton': 'bg-purple-100 text-purple-700',
+        'Volleyball': 'bg-red-100 text-red-700',
+        'Table Tennis': 'bg-teal-100 text-teal-700',
+    };
+
+    return (
+        <div>
+            {/* Header */}
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div>
+                    <h2 className="text-xl font-bold">Registered Students</h2>
+                    <p className="text-sm text-slate-500 mt-1">
+                        {registrations.length} total registrations across {sportNames.length} sports
+                    </p>
+                </div>
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={expandAll}
+                        className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                        Expand All
+                    </button>
+                    <span className="text-slate-300">|</span>
+                    <button
+                        onClick={collapseAll}
+                        className="text-xs text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                        Collapse All
+                    </button>
+                </div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="relative mb-6">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                    type="text"
+                    placeholder="Search by name, register number, department, sport..."
+                    className="w-full pl-10 pr-4 py-2.5 border rounded-lg bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm"
+                    value={searchQuery}
+                    onChange={e => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                    <button
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    >
+                        <X className="w-4 h-4" />
+                    </button>
+                )}
+            </div>
+
+            {/* Filtered results info */}
+            {searchQuery && (
+                <p className="text-sm text-slate-500 mb-4">
+                    Showing {filteredRegistrations.length} result{filteredRegistrations.length !== 1 ? 's' : ''} for "{searchQuery}"
+                </p>
+            )}
+
+            {/* Sports Groups */}
+            {Object.keys(groupedBySport).length === 0 ? (
+                <div className="text-center py-12 text-slate-400">
+                    <Users className="w-12 h-12 mx-auto mb-3 opacity-50" />
+                    <p className="font-medium">No registrations found</p>
+                    <p className="text-sm mt-1">
+                        {searchQuery ? 'Try a different search term' : 'Students will appear here after registration'}
+                    </p>
+                </div>
+            ) : (
+                <div className="space-y-4">
+                    {Object.entries(groupedBySport)
+                        .sort(([a], [b]) => a.localeCompare(b))
+                        .map(([sport, students]) => {
+                            const isExpanded = expandedSports.has(sport);
+                            const colorClass = sportColors[sport] || 'border-slate-400 bg-slate-50';
+                            const badgeColor = sportBadgeColors[sport] || 'bg-slate-100 text-slate-700';
+
+                            return (
+                                <div key={sport} className={`border-l-4 rounded-lg border ${colorClass} overflow-hidden`}>
+                                    {/* Sport Header — clickable to expand/collapse */}
+                                    <button
+                                        onClick={() => toggleSport(sport)}
+                                        className="w-full flex items-center justify-between p-4 hover:bg-white/50 transition-colors text-left"
+                                    >
+                                        <div className="flex items-center gap-3">
+                                            <h3 className="font-bold text-lg text-slate-800">{sport}</h3>
+                                            <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${badgeColor}`}>
+                                                {students.length} student{students.length !== 1 ? 's' : ''}
+                                            </span>
+                                        </div>
+                                        {isExpanded ? (
+                                            <ChevronUp className="w-5 h-5 text-slate-400" />
+                                        ) : (
+                                            <ChevronDown className="w-5 h-5 text-slate-400" />
+                                        )}
+                                    </button>
+
+                                    {/* Students Table */}
+                                    {isExpanded && (
+                                        <div className="bg-white border-t">
+                                            <div className="overflow-x-auto">
+                                                <table className="w-full text-sm">
+                                                    <thead>
+                                                        <tr className="bg-slate-50 text-left text-xs uppercase tracking-wider text-slate-500">
+                                                            <th className="px-4 py-3 font-medium">Name</th>
+                                                            <th className="px-4 py-3 font-medium">Reg. Number</th>
+                                                            <th className="px-4 py-3 font-medium">Department</th>
+                                                            <th className="px-4 py-3 font-medium">Year</th>
+                                                            <th className="px-4 py-3 font-medium">Email</th>
+                                                            <th className="px-4 py-3 font-medium">Phone</th>
+                                                            <th className="px-4 py-3 font-medium">Registered</th>
+                                                            <th className="px-4 py-3 font-medium w-12"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-slate-100">
+                                                        {students
+                                                            .sort((a, b) => new Date(b.registeredAt).getTime() - new Date(a.registeredAt).getTime())
+                                                            .map(student => (
+                                                                <tr key={student.id} className="hover:bg-slate-50/50 transition-colors">
+                                                                    <td className="px-4 py-3">
+                                                                        <div className="flex items-center gap-2">
+                                                                            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-white text-[10px] font-bold shrink-0">
+                                                                                {student.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                                                                            </div>
+                                                                            <span className="font-medium text-slate-800">{student.name}</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td className="px-4 py-3 font-mono text-xs text-slate-600">{student.registerNumber}</td>
+                                                                    <td className="px-4 py-3 text-slate-600">{student.department}</td>
+                                                                    <td className="px-4 py-3 text-slate-600">{student.year}</td>
+                                                                    <td className="px-4 py-3 text-slate-600 text-xs">{student.email}</td>
+                                                                    <td className="px-4 py-3 text-slate-600 text-xs font-mono">{student.phone}</td>
+                                                                    <td className="px-4 py-3 text-slate-500 text-xs">
+                                                                        {new Date(student.registeredAt).toLocaleDateString('en-IN', {
+                                                                            day: 'numeric',
+                                                                            month: 'short',
+                                                                            year: 'numeric',
+                                                                        })}
+                                                                    </td>
+                                                                    <td className="px-4 py-3">
+                                                                        <button
+                                                                            onClick={() => onDelete(student.id)}
+                                                                            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                                                                            title="Remove registration"
+                                                                        >
+                                                                            <Trash2 className="w-3.5 h-3.5" />
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            )}
         </div>
     );
 }
