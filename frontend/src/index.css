@@ -2228,3 +2228,219 @@ section {
 .scroll-depth-5 {
   --parallax-speed: 0.8;
 }
+
+/* ============================================
+   INTRO SECTION - Full Screen Landing
+   ============================================ */
+
+.intro-scroll-container {
+  height: 400vh;
+  /* Scroll space for the zoom animation */
+  position: relative;
+}
+
+.intro-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 40;
+}
+
+.intro-background {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+}
+
+.intro-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.03) 2px,
+      rgba(255, 255, 255, 0.03) 4px);
+  pointer-events: none;
+}
+
+.intro-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center,
+      transparent 30%,
+      rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
+.intro-text-viewport {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.intro-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.intro-title {
+  font-family: 'Teko', 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4rem, 15vw, 14rem);
+  line-height: 0.95;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.intro-letter {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(180, 180, 180, 0.4) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.intro-letter-space {
+  width: 0.3em;
+  display: inline-block;
+}
+
+.intro-letter-s {
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(220, 220, 220, 0.8) 40%,
+      rgba(139, 92, 246, 0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: brightness(1.1);
+  position: relative;
+  transition: filter 0.3s ease;
+}
+
+.intro-subtitle-container {
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 20;
+}
+
+.intro-subtitle {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.intro-scroll-indicator {
+  width: 24px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.intro-scroll-dot {
+  width: 4px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 2px;
+  animation: introScrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes introScrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(14px);
+    opacity: 0.3;
+  }
+}
+
+.intro-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.intro-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(139, 92, 246, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(139, 92, 246, 0.3);
+}
+
+.intro-white-overlay {
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.dark .intro-white-overlay {
+  background: hsl(0 0% 0%);
+}
+
+/* Light mode overrides for intro */
+:root .intro-background {
+  background: #0a0a0a;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .intro-title {
+    font-size: clamp(3rem, 18vw, 8rem);
+  }
+
+  .intro-scroll-container {
+    height: 350vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-title {
+    font-size: clamp(2.5rem, 20vw, 6rem);
+  }
+}
