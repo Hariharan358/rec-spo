@@ -168,7 +168,7 @@ export const AboutSection = () => {
                 { value: 15, suffix: "+", label: "Expert Coaches" },
               ].map((stat, index) => (
                 <motion.div key={stat.label} className="group" variants={staggerItem}>
-                  <TechCard className="p-4 border-none bg-violet-50/50 dark:bg-white/5 shadow-none hover:bg-violet-100/50 dark:hover:bg-white/10 transition-all duration-500 hover:scale-[1.03] hover:-translate-y-1">
+                  <TechCard className="p-4 border-none bg-violet-50/50 dark:bg-white/5 shadow-none hover:bg-violet-100/50 dark:hover:bg-white/10 transition-all duration-500 hover:-translate-y-1">
                     <div className="font-display text-3xl text-violet-600 dark:text-violet-400 group-hover:animate-pulse-scale">
                       <AnimatedCounter
                         end={stat.value}

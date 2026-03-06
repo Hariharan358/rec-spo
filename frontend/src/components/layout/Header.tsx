@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
   { name: "Sports", href: "#sports" },
+  { name: "Facilities", href: "#facilities" },
   { name: "Events", href: "#events" },
   { name: "Team", href: "#team" },
   { name: "Gallery", href: "#gallery" },
@@ -49,7 +50,7 @@ export const Header = () => {
               <img
                 src={recLogo}
                 alt="Logo"
-                className="h-10 w-auto rec-logo group-hover:scale-110 transition-transform duration-300"
+                className="h-10 w-auto rec-logo transition-transform duration-300"
               />
             </div>
             <motion.div

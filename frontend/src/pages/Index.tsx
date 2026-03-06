@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { SportsSection } from "@/components/sections/SportsSection";
+import { FacilitiesSection } from "@/components/sections/FacilitiesSection";
 import { EventsSection } from "@/components/sections/EventsSection";
 import { RegistrationSection } from "@/components/sections/RegistrationSection";
 import { TeamSection } from "@/components/sections/TeamSection";
@@ -135,6 +136,13 @@ const Index = () => {
             <ParallaxElement speed={0.25} className="absolute top-[1200px] right-10 z-0">
               <div className="w-40 h-40 bg-gradient-to-r from-secondary/10 to-violet/10 rounded-full blur-2xl" />
             </ParallaxElement>
+
+            {/* Facilities Section - Fade up reveal */}
+            <ScrollAnimatedSection animation="fade-up" duration={1.1}>
+              <Parallax speed={0.12}>
+                <FacilitiesSection />
+              </Parallax>
+            </ScrollAnimatedSection>
 
             {/* Events Section - Slide from left */}
             <ScrollAnimatedSection animation="fade-up" duration={1.1}>

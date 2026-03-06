@@ -141,7 +141,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
                     <img
                       src={image.secureUrl}
                       alt={image.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200"
+                      className="w-full h-48 object-cover transition-transform duration-200"
                     />
                     
                     {/* Overlay Actions */}

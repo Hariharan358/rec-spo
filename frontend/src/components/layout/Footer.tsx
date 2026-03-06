@@ -107,7 +107,7 @@ export const Footer = () => {
                   href="https://www.linkedin.com/in/hariharan-k-csbs" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-white bg-secondary/20 hover:bg-secondary/30 px-3 py-1.5 rounded-full transition-all duration-300 font-semibold hover:scale-105 border border-secondary/30"
+                  className="flex items-center gap-2 text-white bg-secondary/20 hover:bg-secondary/30 px-3 py-1.5 rounded-full transition-all duration-300 font-semibold border border-secondary/30"
                 >
                   <Linkedin className="w-4 h-4 text-secondary" />
                   <span className="text-primary-foreground">Hariharan K - CSBS</span>
@@ -116,7 +116,7 @@ export const Footer = () => {
                   href="https://www.linkedin.com/in/hariharan-k-csbs" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-white bg-secondary/20 hover:bg-secondary/30 px-3 py-1.5 rounded-full transition-all duration-300 font-semibold hover:scale-105 border border-secondary/30"
+                  className="flex items-center gap-2 text-white bg-secondary/20 hover:bg-secondary/30 px-3 py-1.5 rounded-full transition-all duration-300 font-semibold border border-secondary/30"
                 >
                   <Linkedin className="w-4 h-4 text-secondary" />
                   <span className="text-primary-foreground">BharathiRaja - CSBS</span>

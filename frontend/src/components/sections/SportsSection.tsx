@@ -139,7 +139,7 @@ const SportsCard = ({ sport, index, scrollYProgress }: { sport: any; index: numb
               <span>#Champions</span>
             </div>
 
-            <button className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black px-5 py-2 rounded-lg font-bold uppercase tracking-wider text-xs hover:bg-violet-600 dark:hover:bg-violet-400 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-1.5 group/btn shadow-lg">
+            <button className="w-full md:w-auto bg-black dark:bg-white text-white dark:text-black px-5 py-2 rounded-lg font-bold uppercase tracking-wider text-xs hover:bg-violet-600 dark:hover:bg-violet-400 active:translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-1.5 group/btn shadow-lg">
               Join Team <ArrowRight className="w-3 h-3 transition-transform group-hover/btn:translate-x-1" />
             </button>
           </div>
@@ -285,7 +285,7 @@ export const SportsSection = () => {
             className="flex-shrink-0 w-[240px] md:w-[300px] h-[350px] md:h-[360px] flex flex-col justify-center items-center p-6 border border-black/5 dark:border-white/5 rounded-[1.5rem] hover:bg-black/5 dark:hover:bg-white/5 transition-all group cursor-pointer border-dashed"
             style={{ y: ctaY, scale: ctaScale, opacity: ctaOpacity }}
           >
-            <div className="w-16 h-16 rounded-full bg-gray-50 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-violet-500/50 transition-all duration-300">
+            <div className="w-16 h-16 rounded-full bg-gray-50 dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 flex items-center justify-center mb-4 group-hover:border-violet-500/50 transition-all duration-300">
               <ArrowRight className="w-7 h-7 text-violet-600 dark:text-violet-400" />
             </div>
             <h3 className="text-2xl font-display font-bold text-foreground uppercase text-center leading-none">
