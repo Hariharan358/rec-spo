@@ -6,61 +6,61 @@
 
 @layer base {
   :root {
-    /* White and Violet color palette */
+    /* Gray and Zinc color palette */
     --background: 0 0% 100%;
-    --foreground: 270 15% 20%;
+    --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 270 15% 20%;
+    --card-foreground: 240 10% 3.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 270 15% 20%;
+    --popover-foreground: 240 10% 3.9%;
 
-    /* Deep violet - primary brand color */
-    --primary: 270 50% 40%;
-    --primary-foreground: 0 0% 100%;
+    /* Deep Charcoal - primary brand color */
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
 
-    /* Light violet - secondary accent */
-    --secondary: 270 30% 70%;
-    --secondary-foreground: 270 15% 20%;
+    /* Light Gray - secondary accent */
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
 
-    --muted: 270 10% 95%;
-    --muted-foreground: 270 8% 50%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
 
-    /* Bright violet accent */
-    --accent: 270 70% 60%;
-    --accent-foreground: 0 0% 100%;
+    /* Solid Gray accent */
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
-    /* Violet red for highlights */
-    --destructive: 350 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    /* Red for highlights */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 270 15% 90%;
-    --input: 270 15% 90%;
-    --ring: 270 50% 40%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
 
     --radius: 0.75rem;
 
-    /* Custom violet tokens */
-    --navy: 270 50% 40%;
-    --navy-light: 270 40% 50%;
-    --orange: 270 70% 60%;
-    --orange-dark: 270 60% 50%;
-    --gold: 270 80% 70%;
-    --success: 270 50% 50%;
+    /* Custom tokens mapped to neutral */
+    --navy: 240 5.9% 10%;
+    --navy-light: 240 5% 30%;
+    --orange: 240 5% 20%;
+    --orange-dark: 240 5% 10%;
+    --gold: 240 5% 60%;
+    --success: 142.1 76.2% 36.3%;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(270 50% 40%) 0%, hsl(270 40% 50%) 50%, hsl(270 70% 60%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(270 10% 98%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(270 70% 60%) 0%, hsl(270 80% 70%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(270 50% 40% / 0.9) 100%);
+    /* Gradients - now neutral */
+    --gradient-hero: linear-gradient(135deg, hsl(240 5.9% 10%) 0%, hsl(240 5% 30%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(240 4.8% 99%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(240 5% 20%) 0%, hsl(240 5% 40%) 100%);
+    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(0 0% 0% / 0.8) 100%);
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px 0 hsl(270 50% 40% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(270 50% 40% / 0.1), 0 2px 4px -2px hsl(270 50% 40% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(270 50% 40% / 0.1), 0 4px 6px -4px hsl(270 50% 40% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(270 50% 40% / 0.15), 0 8px 10px -6px hsl(270 50% 40% / 0.1);
-    --shadow-glow: 0 0 30px hsl(270 70% 60% / 0.3);
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 30px rgb(0 0 0 / 0.2);
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -74,33 +74,33 @@
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 270 15% 4%;
+    --card: 240 10% 3.9%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 270 15% 4%;
+    --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 270 70% 60%;
-    --primary-foreground: 270 15% 8%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
 
-    --secondary: 270 30% 12%;
+    --secondary: 240 3.7% 15.9%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 270 15% 10%;
-    --muted-foreground: 270 10% 65%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 270 80% 70%;
-    --accent-foreground: 270 15% 8%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 350 63% 31%;
+    --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 270 15% 12%;
-    --input: 270 15% 12%;
-    --ring: 270 70% 60%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -110,7 +110,7 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
-    --grid-line-color: hsl(270 50% 40% / 0.08);
+    --grid-line-color: hsl(0 0% 100% / 0.05);
   }
 }
 
@@ -122,10 +122,6 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Barlow', sans-serif;
-    background-image: linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
-    background-size: 50px 50px;
-    background-attachment: fixed;
   }
 
   h1,
@@ -141,8 +137,7 @@
 
 @layer components {
   .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-accent);
+    color: inherit;
   }
 
   .bg-gradient-hero {
@@ -158,18 +153,52 @@
   }
 
   .shadow-glow {
-    box-shadow: var(--shadow-glow);
+    box-shadow: none;
   }
 
   /* Brutalist Card Styles */
   .card-sports {
-    @apply bg-card relative overflow-hidden;
-    padding: 30px;
-    background: #fff;
-    border: 8px solid #000;
-    box-shadow: 15px 15px 0 #000;
-    transform: rotate(-2deg);
-    transition: all 0.3s ease;
+    @apply bg-card relative;
+    padding: 35px;
+    background: hsl(var(--card));
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.03);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Corner Brackets */
+  .card-sports::before,
+  .card-sports::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  /* Top Left Bracket */
+  .card-sports::before {
+    top: -1px;
+    left: -1px;
+    border-top: 5px solid #000;
+    border-left: 5px solid #000;
+  }
+
+  /* Bottom Right Bracket */
+  .card-sports::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 5px solid #000;
+    border-right: 5px solid #000;
+  }
+
+  .card-sports:hover::before,
+  .card-sports:hover::after {
+    width: 100%;
+    height: 100%;
+    border-width: 1px;
+    opacity: 0.2;
   }
 
   .card-sports:active {
@@ -177,48 +206,47 @@
   }
 
   .card-sports:hover {
-    transform: rotate(0deg);
-    box-shadow: 20px 20px 0 #000;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
   }
 
-  /* Dark mode adjustments for brutalist cards */
+  /* Dark mode adjustments for cards */
   .dark .card-sports {
-    background: hsl(270 15% 11%);
-    border-color: #ffffff;
-    box-shadow: 15px 15px 0 #ffffff;
-  }
-
-  .dark .card-sports:hover {
-    box-shadow: 20px 20px 0 #ffffff;
+    background: hsl(var(--card));
+    border-color: hsl(var(--border));
+    box-shadow: var(--shadow-lg);
   }
 
   .card-premium {
     @apply card-sports;
-    background: hsl(270 70% 60% / 0.05);
-    border: 8px solid hsl(270 70% 60%);
-    box-shadow: 15px 15px 0 hsl(270 70% 60%);
+    background: hsl(var(--primary) / 0.02);
+    border: 1px solid hsl(var(--primary) / 0.1);
+  }
+
+  .card-premium::before {
+    border-top-color: hsl(var(--primary));
+    border-left-color: hsl(var(--primary));
+  }
+
+  .card-premium::after {
+    border-bottom-color: hsl(var(--primary));
+    border-right-color: hsl(var(--primary));
   }
 
   .card-premium:hover {
-    background: hsl(270 70% 60% / 0.1);
-    box-shadow: 20px 20px 0 hsl(270 70% 60%);
+    background: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary) / 0.4);
   }
 
   .dark .card-premium {
-    background: hsl(270 70% 60% / 0.1);
-    border-color: hsl(270 80% 70%);
-    box-shadow: 15px 15px 0 hsl(270 80% 70%);
-  }
-
-  .dark .card-premium:hover {
-    box-shadow: 20px 20px 0 hsl(270 80% 70%);
+    background: hsl(var(--primary) / 0.1);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   .btn-athletic {
     @apply inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 relative overflow-hidden;
-    @apply bg-gradient-to-r from-violet to-violet-dark text-white;
-    @apply hover:shadow-glow;
-    background: linear-gradient(135deg, hsl(270 70% 60%) 0%, hsl(270 60% 50%) 100%);
+    @apply text-white;
+    background: var(--gradient-hero);
   }
 
   .btn-athletic::before {
@@ -633,19 +661,11 @@
 
   /* Enhanced gradient text */
   .gradient-text {
-    background: linear-gradient(135deg, hsl(270 70% 60%), hsl(270 80% 70%), hsl(280 70% 65%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: inherit;
   }
 
   .gradient-text-animated {
-    background: linear-gradient(45deg, hsl(270 70% 60%), hsl(270 80% 70%), hsl(280 70% 65%), hsl(270 70% 60%));
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradient-shift 3s ease infinite;
+    color: inherit;
   }
 
   /* 3D Card effects */
@@ -1784,17 +1804,39 @@
   opacity: 0.8;
 }
 
+.parallax {
+  overflow: hidden;
+  margin: 0;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  min-height: 12rem;
+  align-items: center;
+}
+
+.scroller {
+  display: flex;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  min-width: max-content;
+}
+
 .custom-scroll-text {
-  background: linear-gradient(135deg, hsl(270 70% 60%) 0%, hsl(270 80% 70%) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #000000 !important;
   font-family: 'Teko', sans-serif;
-  font-weight: 500;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.02em;
+  font-size: clamp(4rem, 12vw, 10rem);
+  white-space: nowrap;
+  line-height: 1;
+  padding: 0 4rem;
   position: relative;
   transition: all 0.3s ease;
+  display: inline-block;
+  z-index: 50;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .custom-scroll-text:hover {
@@ -1804,11 +1846,11 @@
 /* Enhanced animations */
 @keyframes textGlow {
   0% {
-    filter: drop-shadow(0 2px 4px rgba(139, 92, 246, 0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   }
 
   100% {
-    filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.6));
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   }
 }
 
@@ -2449,6 +2491,7 @@ section {
 
 /* Mobile devices (phones) */
 @media (max-width: 768px) {
+
   /* Reduce brutalist card borders for mobile */
   .card-sports {
     border-width: 4px;
@@ -2712,6 +2755,7 @@ section {
 
 /* Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
+
   /* Disable complex hover effects on touch devices */
   .hover-lift:hover,
   .hover-tilt:hover,
@@ -2784,7 +2828,9 @@ section {
 }
 
 /* High DPI screens (Retina displays) */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+
   /* Sharper borders and shadows */
   .card-sports,
   .card-premium {
@@ -2805,6 +2851,7 @@ section {
 
 /* Reduced motion preferences (accessibility) */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -2856,6 +2903,7 @@ section {
 
 /* Print styles */
 @media print {
+
   .dynamic-island,
   .floating-element,
   .parallax-element,

@@ -9,12 +9,12 @@ interface ParallaxProps {
   offset?: number;
 }
 
-export const Parallax = ({ 
-  children, 
-  speed = 0.5, 
-  className = '', 
+export const Parallax = ({
+  children,
+  speed = 0.5,
+  className = '',
   direction = 'up',
-  offset = 0 
+  offset = 0
 }: ParallaxProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -92,7 +92,7 @@ export const ParallaxBackground = ({
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
           {overlay && (
-            <div 
+            <div
               className="absolute inset-0 bg-black"
               style={{ opacity: overlayOpacity }}
             />

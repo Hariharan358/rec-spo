@@ -256,118 +256,81 @@ export const AboutSection = () => {
           </motion.div>
         </div>
 
-        {/* Enhanced Leadership */}
-        <motion.div
-          className="glass-card rounded-2xl p-8 md:p-12 hover-glow"
-          initial={{ opacity: 0, y: 60, scale: 0.96 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <div className="mt-32 relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.8 }}
           >
-            <AnimatedHeading className="font-display text-2xl md:text-3xl text-foreground tracking-wider text-center mb-8" delay={1}>
-              CLUB LEADERSHIP
-            </AnimatedHeading>
+            <h3 className="font-display text-4xl md:text-5xl text-foreground tracking-tighter mb-4">
+              CLUB <span className="opacity-40">LEADERSHIP</span>
+            </h3>
+            <div className="w-24 h-1 bg-primary mx-auto" />
           </motion.div>
 
-          {/* Animated divider */}
-          <motion.div
-            className="mx-auto mb-8 h-[1px] bg-gradient-to-r from-transparent via-violet-500/40 to-transparent"
-            initial={{ width: 0 }}
-            whileInView={{ width: 160 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
-
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            {/* Left Column - Image */}
-            <motion.div
-              className="relative h-full min-h-[400px] flex items-center justify-center"
-              initial={{ opacity: 0, x: -60 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            >
+          {/* New Leadership Grid */}
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto px-4">
+            {[
+              {
+                name: "Dr. M. Vijayaragavan",
+                role: "Director of Physical Education",
+                id: "REC-DIR-01",
+                icon: Users,
+                description: "Over 25 years of experience in athletic development and sports administration."
+              },
+              {
+                name: "Ms. Renuga",
+                role: "Sports Director",
+                id: "REC-SPT-02",
+                icon: Award,
+                description: "Dedicated to fostering competitive spirit and excellence in collegiate sports."
+              },
+            ].map((person, index) => (
               <motion.div
-                className="absolute inset-0 bg-violet-500/10 blur-3xl rounded-full"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.5, 0.8, 0.5],
-                }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              />
-              <motion.img
-                src="/images/runner.png"
-                alt="Runner Sprinting"
-                className="relative z-10 w-full max-w-[800px] object-contain mix-blend-normal bg-white/30 backdrop-grayscale"
-                whileHover={{ scale: 1.07, filter: "brightness(1.1)" }}
-                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              />
-            </motion.div>
+                key={person.name}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="group relative"
+              >
+                <div className="absolute inset-0 bg-muted/20 -inset-x-4 -inset-y-4 rounded-3xl scale-95 group-hover:scale-100 transition-transform duration-500" />
+                <div className="relative border border-border bg-card p-10 rounded-2xl flex flex-col items-start gap-6 h-full transition-all duration-300 group-hover:shadow-2xl group-hover:shadow-primary/5 group-hover:-translate-y-1">
+                  <div className="w-16 h-16 rounded-full bg-primary/5 flex items-center justify-center border border-primary/10 mb-2">
+                    <person.icon className="w-8 h-8 text-primary" />
+                  </div>
+                  <div>
+                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1 block">
+                      {person.id}
+                    </span>
+                    <h4 className="font-display text-2xl text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+                      {person.name}
+                    </h4>
+                    <p className="font-sans text-sm font-semibold text-primary/80 uppercase tracking-widest mb-4">
+                      {person.role}
+                    </p>
+                    <div className="w-full h-px bg-border/50 mb-4" />
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {person.description}
+                    </p>
+                  </div>
 
-            {/* Right Column - Leadership Cards */}
-            <motion.div
-              className="flex flex-col gap-6"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-            >
-              {[
-                { name: "Dr.M.Vijayaragavan", role: "Director Of Physical Education", id: "REC-DIR-01", icon: Users },
-                { name: "Ms.Renuga", role: "Sports Director", id: "REC-SPT-02", icon: Award },
-              ].map((person) => (
-                <motion.div key={person.name} className="group w-full" variants={staggerItem}>
-                  <motion.div
-                    whileHover={{ y: -4, scale: 1.01 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  >
-                    <TechCard className="p-6 md:p-8 flex items-center gap-6 bg-white/50 dark:bg-[#0a0a0a]/80 backdrop-blur-sm border border-black/40 dark:border-violet-500/10 hover:border-violet-500/40 text-left transition-all duration-500 hover:shadow-lg hover:shadow-violet-500/10">
-
-                      {/* Avatar */}
-                      <div className="relative shrink-0">
-                        <motion.div
-                          className="absolute inset-0 bg-violet-500/20 blur-xl rounded-full"
-                          whileHover={{ scale: 1.3, opacity: 0.6 }}
-                          transition={{ duration: 0.5 }}
-                        />
-                        <motion.div
-                          className="w-20 h-20 rounded-full bg-gradient-to-br from-white to-violet-50 dark:from-neutral-900 dark:to-neutral-800 border-2 border-violet-500/20 flex items-center justify-center relative z-10"
-                          whileHover={{ scale: 1.1, borderColor: "rgba(139,92,246,0.5)" }}
-                          transition={{ type: "spring", stiffness: 300 }}
-                        >
-                          <person.icon className="w-8 h-8 text-violet-600 dark:text-violet-400 group-hover:text-violet-500 transition-colors duration-500" />
-                        </motion.div>
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between mb-1">
-                          <h4 className="font-display text-xl md:text-2xl text-foreground group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors duration-500 truncate">
-                            {person.name}
-                          </h4>
-                          <span className="text-[10px] font-mono text-violet-400 opacity-60 ml-2 shrink-0 group-hover:opacity-100 transition-opacity duration-500">
-                            [{person.id}]
-                          </span>
-                        </div>
-
-                        <div className="h-px w-12 bg-violet-500/30 my-2 group-hover:w-full transition-all duration-700 ease-out" />
-
-                        <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground truncate group-hover:text-violet-500/80 transition-colors duration-500">
-                          {person.role}
-                        </p>
-                      </div>
-                    </TechCard>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </motion.div>
+                  {/* Decorative corner element */}
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-4 h-4 border-t-2 border-r-2 border-primary/20" />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+
+          {/* Background Spirit Element - Runner moved to background with low opacity */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none opacity-[0.03] flex items-center justify-center z-0">
+            <img src="/images/runner.png" alt="" className="w-full max-w-4xl object-contain grayscale" />
+          </div>
+        </div>
       </div>
     </section>
   );

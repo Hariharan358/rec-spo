@@ -94,7 +94,7 @@ export const RegistrationSection = () => {
     setIsSubmitted(true);
     toast({
       title: "Registration Successful! 🎉",
-      description: "Welcome to Titans Sports Club. We'll contact you soon.",
+      description: "Welcome to REC Sports Club. We'll contact you soon.",
     });
   };
 
@@ -163,7 +163,7 @@ export const RegistrationSection = () => {
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
-        className="absolute bottom-10 left-10 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute bottom-10 left-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"
         animate={{
           y: [0, 20, 0],
           scale: [1, 1.15, 1],
@@ -188,7 +188,7 @@ export const RegistrationSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            Become a Titan
+            Join REC Sports
           </motion.span>
           <motion.h2
             className="font-display text-4xl md:text-5xl lg:text-6xl text-primary-foreground tracking-wider"
@@ -238,7 +238,7 @@ export const RegistrationSection = () => {
                         <FormItem>
                           <FormLabel>Full Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter your full name" {...field} className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg focus:shadow-violet-500/5" />
+                            <Input placeholder="Enter your full name" {...field} className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg focus:shadow-primary/5" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -255,7 +255,7 @@ export const RegistrationSection = () => {
                         <FormItem>
                           <FormLabel>Register Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="e.g., 2024CS001" {...field} className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg focus:shadow-violet-500/5" />
+                            <Input placeholder="e.g., 2024CS001" {...field} className="transition-all duration-300 focus:scale-[1.01] focus:shadow-lg focus:shadow-primary/5" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
